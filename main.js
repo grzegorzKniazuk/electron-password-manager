@@ -6,7 +6,7 @@ function createWindow () {
   win = new BrowserWindow({
     width: 1366,
     height: 768,
-    icon: `file://${__dirname}/dist/assets/images/key.png`
+    icon: `file://${__dirname}/dist/assets/images/key.ico`,
   });
 
 

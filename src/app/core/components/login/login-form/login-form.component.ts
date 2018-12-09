@@ -34,8 +34,10 @@ export class LoginFormComponent implements OnInit {
   }
 
   public register(): void {
-    this.authService.register(this.authForm.value)
-    .then(() => this.toastService.success('Account created, please log in!'))
-    .catch((error) => this.toastService.error(error.message));
+    if (this.authForm.valid) {
+      this.authService.register(this.authForm.value)
+      .then(() => this.toastService.success('Account created, please log in!'))
+      .catch((error) => this.toastService.error(error.message));
+    }
   }
 }

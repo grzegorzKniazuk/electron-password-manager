@@ -1,15 +1,31 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { MatDialog } from '@angular/material';
+import { AddPasswordComponent } from './add-password/add-password.component';
+import { ToastService } from '../../../services/toast.service';
+import { AuthService } from '../../../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-password-list',
   templateUrl: './password-list.component.html',
-  styleUrls: ['./password-list.component.scss']
+  styleUrls: ['./password-list.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class PasswordListComponent implements OnInit {
+export class PasswordListComponent {
 
-  constructor() { }
+  constructor(private matDialog: MatDialog,
+              private toastService: ToastService,
+              private authService: AuthService,
+              private router: Router) { }
 
-  ngOnInit() {
+  public openNewPasswordModal(): void {
+    this.matDialog.open(AddPasswordComponent);
   }
 
+  public logout(): void {
+    this.authService.logout().then(() => {
+      this.router.navigate(['login']);
+    }).catch((error) => {
+      this.toastService.error(error);
+    });
+  }
 }

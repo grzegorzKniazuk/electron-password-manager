@@ -1,16 +1,17 @@
 import { Injectable } from '@angular/core';
-import { UserInfo } from 'firebase';
+import { User, UserInfo } from 'firebase';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Credentials } from '../interfaces/credentials';
 import { ToastService } from './toast.service';
 import UserCredential = firebase.auth.UserCredential;
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
 
-  readonly authState$ = this.angularFireAuth.authState;
+  readonly authState$: Observable<User | null> = this.angularFireAuth.authState;
   private userData: UserInfo;
 
   constructor(private angularFireAuth: AngularFireAuth, private toastService: ToastService) {}

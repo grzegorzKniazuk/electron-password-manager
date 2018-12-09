@@ -4,10 +4,10 @@
   @include flex(flex, center, center, column);
   @include size(100%, 100%);
   background: $background-222;
-  animation: opacity-1 150ms ease-in;
 
   img {
     @include size(150px);
+    animation: opacity-1 150ms ease-in;
     margin-bottom: 15px;
     cursor: pointer;
 

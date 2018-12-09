@@ -14,4 +14,13 @@ export class FormService {
       password: [ '', [ Validators.required, Validators.minLength(6) ] ],
     });
   }
+
+  public get credentialsForm(): FormGroup {
+    return this.formBuilder.group({
+      date: Date.now(),
+      refersTo: [ '', Validators.required ],
+      login: [ '', Validators.required ],
+      password: [ '', Validators.required ],
+    });
+  }
 }

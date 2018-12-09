@@ -1,0 +1,22 @@
+@import "./src/assets/styles/base.scss";
+
+.intro-container {
+  @include flex(flex, center, center, column);
+  @include size(100%, 100%);
+  background: $background-222;
+  animation: opacity-1 150ms ease-in;
+
+  img {
+    @include size(150px);
+    margin-bottom: 15px;
+    cursor: pointer;
+
+    &.scale {
+      animation: scale-12 2s infinite linear;
+    }
+
+    &.rotate {
+      animation: rotate-360 1s infinite linear;
+    }
+  }
+}

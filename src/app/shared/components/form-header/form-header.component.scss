@@ -1,0 +1,11 @@
+@import "./src/assets/styles/base.scss";
+
+.form-header {
+  @include flex(flex, center, center);
+  height: 50px;
+  color: $white;
+  text-transform: uppercase;
+  background: $material-indigo-pink-background;
+  border-top-left-radius: $border-radius;
+  border-top-right-radius: $border-radius;
+}

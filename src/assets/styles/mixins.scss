@@ -1,0 +1,54 @@
+// variables
+$line-height: 1.625rem;
+$border-radius: 10px;
+
+// mixins
+@mixin flex($flex: inline-flex, $justify-content: flex-start, $align-items: stretch, $flex-direction: row, $position: static, $wrap: nowrap) {
+  display: $flex;
+  justify-content: $justify-content;
+  align-items: $align-items;
+  flex-direction: $flex-direction;
+  position: $position;
+  flex-wrap: $wrap;
+}
+
+@mixin size($width: auto, $height: auto, $max-width: none, $max-height: none) {
+  width: $width;
+  height: $height;
+  max-width: $max-width;
+  max-height: $max-height;
+}
+
+@mixin position($top: auto, $right: auto, $bottom: auto, $left: auto) {
+  top: $top;
+  right: $right;
+  bottom: $bottom;
+  left: $left;
+}
+
+@mixin data-icon($x, $y, $padding-left) {
+  $icons: 'user', 'password', 'mail', 'tv', 'package', 'image', 'edit';
+  @each $icon in $icons {
+    &[data-icon=#{$icon}] {
+      background: $light url('~src/assets/icons/#{$icon}.svg') no-repeat $x $y;
+      padding-left: $padding-left;
+    }
+  }
+}
+
+@mixin font($font-size, $font-weight: 400, $font-family: 'Roboto') {
+  @if ($font-size == 'ultra-small') {
+    font-size: .75rem;
+  } @else if ($font-size == 'small') {
+    font-size: 1rem;
+  }
+  @if ($font-size == 'medium') {
+    font-size: 1.625rem;
+  }
+  @if ($font-size == 'big') {
+    font-size: 2.625rem;
+  }
+  font-family: $font-family, serif;
+  font-weight: $font-weight;
+  line-height: 1.625rem;
+}

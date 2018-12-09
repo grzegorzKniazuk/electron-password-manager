@@ -1,0 +1,27 @@
+@import "./src/assets/styles/base.scss";
+
+.login-container {
+  @include flex(flex, center, center, column);
+  @include size(100%, 100%);
+  background: $background-222;
+
+  form {
+    @include flex(flex, center, center, column);
+    @include size(400px, 360px);
+    background: $background-f8f;
+    border-bottom-left-radius: $border-radius;
+    border-bottom-right-radius: $border-radius;
+    animation: opacity-1 150ms ease-in;
+
+    mat-form-field {
+      @include size(80%);
+      margin-bottom: 18px;
+    }
+
+    p {
+      margin-top: 45px;
+    }
+  }
+}
+
+

@@ -1,0 +1,23 @@
+// reset
+@import '../node_modules/reset-css/reset.css';
+
+// angular theme
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+// base
+@import "./src/assets/styles/base.scss";
+
+* {
+  font-size: 1rem;
+  line-height: 1.625rem;
+}
+
+body {
+  @include size(100%, 100vh);
+  @include font('small', 400, 'Roboto');
+  text-rendering: optimizeLegibility;
+
+  strong {
+    font-weight: 700;
+  }
+}

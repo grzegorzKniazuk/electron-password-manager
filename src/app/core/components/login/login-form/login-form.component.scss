@@ -5,9 +5,9 @@
   @include size(100%, 100%);
   background: $background-222;
 
-  form {
+  .login-form {
     @include flex(flex, center, center, column);
-    @include size(400px, 360px);
+    @include size(320px, 270px);
     background: $background-f8f;
     border-bottom-left-radius: $border-radius;
     border-bottom-right-radius: $border-radius;
@@ -19,6 +19,35 @@
 
     p {
       margin-top: 45px;
+    }
+
+    .button-container {
+
+      button {
+        &:first-of-type {
+          padding-right: 30px;
+          margin-right: -15px;
+        }
+
+        &:nth-of-type(2) {
+          cursor: default;
+          user-select: none;
+          pointer-events: none;
+          z-index: 1001 !important;
+        }
+
+        &:last-of-type {
+          padding-left: 30px;
+          margin-left: -15px;
+        }
+      }
+
+      span {
+        @include flex(inline-flex, center, center);
+        @include size(60px, 60px);
+        border-radius: 50%;
+        color: $white;
+      }
     }
   }
 }

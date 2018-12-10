@@ -1,3 +1,8 @@
-<div class="form-header" [style.width]="width">
-  <h1><ng-content></ng-content></h1>
+<div class="form-header-wrapper">
+  <div class="form-header"
+       [style.width]="width"
+       [style.top]="top"
+       [style.left]="left" [style.position]="(top !== 'auto' || left !== 'auto') ? 'absolute' : 'relative' ">
+    <h1><ng-content></ng-content></h1>
+  </div>
 </div>

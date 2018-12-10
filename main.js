@@ -7,6 +7,7 @@ function createWindow () {
     width: 1366,
     height: 768,
     icon: `file://${__dirname}/dist/assets/images/key.ico`,
+    autoHideMenuBar: true,
   });
 
 

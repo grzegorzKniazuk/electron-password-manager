@@ -6,3 +6,22 @@ mat-error {
   @include font('ultra-small');
   margin-top: -8px;
 }
+
+mat-checkbox {
+  user-select: none;
+}
+
+mat-hint {
+  @include font('ultra-small');
+  margin-top: -8px;
+  margin-bottom: 18px;
+  user-select: none;
+}
+
+.mat-dialog-container {
+  overflow: visible !important;
+}
+
+button:disabled {
+  cursor: not-allowed;
+}

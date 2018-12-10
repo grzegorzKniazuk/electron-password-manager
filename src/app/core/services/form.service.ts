@@ -23,4 +23,12 @@ export class FormService {
       password: [ '', Validators.required ],
     });
   }
+
+  public get settingsForm(): FormGroup {
+    return this.formBuilder.group({
+      autostart: [ false ],
+      minimalizeToTray: [ false ],
+      saveToFirebase: [ false ],
+    });
+  }
 }

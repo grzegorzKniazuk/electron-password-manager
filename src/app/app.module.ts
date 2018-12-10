@@ -9,6 +9,7 @@ import { AngularFireModule } from '@angular/fire';
 import { environment } from '../environments/environment';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { AngularFireAuthModule } from '@angular/fire/auth';
+import {UserDataResolve} from './core/resolves/user-data.resolve';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,11 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
     MaterialModule,
     BrowserAnimationsModule,
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [
+    UserDataResolve,
+  ],
+  bootstrap: [
+    AppComponent,
+  ],
 })
 export class AppModule { }

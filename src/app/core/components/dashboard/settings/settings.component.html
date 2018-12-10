@@ -1,0 +1,15 @@
+<app-form-header mat-dialog-title width="480px" left="-24px" top="-90px">Application settings</app-form-header>
+<mat-dialog-content>
+  <form [formGroup]="settingsForm" autocomplete="off">
+    <mat-checkbox formControlName="autostart">Autostart</mat-checkbox>
+    <mat-hint>Check if You want to autostart application on system start.</mat-hint>
+    <mat-checkbox formControlName="minimalizeToTray">Minimalize to tray</mat-checkbox>
+    <mat-hint>Check if You want to minimalize application to tray by close button.</mat-hint>
+    <mat-checkbox formControlName="saveToFirebase">Save into cloud</mat-checkbox>
+    <mat-hint>Check if You want to save Your data into Google Firebase cloud database.</mat-hint>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions align="center">
+  <button type="submit" mat-raised-button color="primary" (click)="saveSettings()" [disabled]="settingsForm.invalid">SAVE SETTINGS</button>
+  <button type="button" mat-raised-button mat-dialog-close color="warn">ABORT</button>
+</mat-dialog-actions>

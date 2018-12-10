@@ -8,4 +8,6 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 })
 export class FormHeaderComponent {
   @Input() width: string;
+  @Input() top = 'auto';
+  @Input() left = 'auto';
 }

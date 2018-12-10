@@ -11,10 +11,11 @@ import { Observable } from 'rxjs';
 })
 export class AuthService {
 
-  readonly authState$: Observable<User | null> = this.angularFireAuth.authState;
+  public readonly authState$: Observable<User | null> = this.angularFireAuth.authState;
   private userData: UserInfo;
 
-  constructor(private angularFireAuth: AngularFireAuth, private toastService: ToastService) {}
+  constructor(private angularFireAuth: AngularFireAuth, private toastService: ToastService) {
+  }
 
   public login(credentials: Credentials): Promise<void> {
     return this.angularFireAuth.auth.signInWithEmailAndPassword(credentials.email, credentials.password).then(userData => {

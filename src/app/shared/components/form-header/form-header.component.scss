@@ -1,11 +1,16 @@
 @import "./src/assets/styles/base.scss";
 
-.form-header {
-  @include flex(flex, center, center);
-  height: 50px;
-  color: $white;
-  text-transform: uppercase;
-  background: $material-indigo-pink-background;
-  border-top-left-radius: $border-radius;
-  border-top-right-radius: $border-radius;
+.form-header-wrapper {
+  position: relative;
+  z-index: 1001; // required for custom material dialog header
+
+  .form-header {
+    @include flex(flex, center, center);
+    height: 50px;
+    color: $white;
+    text-transform: uppercase;
+    background: $material-indigo-pink-background;
+    border-top-left-radius: $border-radius;
+    border-top-right-radius: $border-radius;
+  }
 }

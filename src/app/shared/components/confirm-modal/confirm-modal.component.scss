@@ -2,7 +2,6 @@
 
 .confirm-container {
   @include flex(flex, center, center, column);
-  padding: 5px;
 
   p {
     margin-bottom: 15px;

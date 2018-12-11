@@ -6,4 +6,5 @@ export enum ToastMessages {
   credentialsUpdated = 'The credentials was updated successfully',
   credentialsDeleted = 'The credentials has been deleted successfully',
   successfullyCopied = 'Successfully copied to the clipboard',
+  settingsSaved = 'Settings saved successfully',
 }

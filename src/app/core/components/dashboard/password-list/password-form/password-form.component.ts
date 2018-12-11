@@ -3,6 +3,8 @@ import { FormGroup } from '@angular/forms';
 import { FormService } from '../../../../services/form.service';
 import {PasswordData} from '../../../../interfaces/password-data';
 import {MatDialogRef} from '@angular/material';
+import {GeneratorSettings} from '../../../../interfaces/generator-settings';
+import * as PasswordGenerator from '../../../../../../../node_modules/generate-password';
 
 @Component({
   selector: 'app-password-form',
@@ -14,7 +16,9 @@ export class PasswordFormComponent implements OnInit {
 
   @Input() public credentialsData: PasswordData;
   public credentialsForm: FormGroup;
-  private readonly data: PasswordData[] = JSON.parse(window.localStorage.getItem('data'));
+  public passwordInputFocus = false;
+  private passwordGeneratorSettings: GeneratorSettings;
+  private data: PasswordData[] = JSON.parse(window.localStorage.getItem('data'));
 
   constructor(private formService: FormService, private matDialogRef: MatDialogRef<PasswordFormComponent>) { }
 
@@ -47,7 +51,22 @@ export class PasswordFormComponent implements OnInit {
 
   public updateCredentials(): void {
     if (this.credentialsForm.valid) {
-
+      this.data = this.data.filter((password: PasswordData) => password.id !== this.credentialsData.id);
+      this.data.push({
+        id: this.credentialsData.id,
+        refersTo: this.credentialsForm.get('refersTo').value,
+        login: this.credentialsForm.get('login').value,
+        password: this.credentialsForm.get('password').value,
+      });
+      window.localStorage.setItem('data', JSON.stringify(this.data));
+      this.matDialogRef.close('ok');
     }
+  }
+
+  public generatePassword(): void {
+    console.log(PasswordGenerator.generate({
+      length: 10,
+      numbers: false,
+    }));
   }
 }

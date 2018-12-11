@@ -36,6 +36,8 @@ export class PasswordListComponent implements OnInit {
   private initData(): void {
     this.data = JSON.parse(window.localStorage.getItem('data'));
     this.dataSource = new MatTableDataSource<PasswordData>(this.data);
+    this.initSort();
+    this.initPagination();
     this.changeDetectorRef.detectChanges();
   }
 
@@ -68,7 +70,8 @@ export class PasswordListComponent implements OnInit {
       data: element,
     }).afterClosed().subscribe((response: string) => {
       if (response === 'ok') {
-
+        this.initData();
+        this.toastService.success(ToastMessages.credentialsUpdated);
       }
     });
   }

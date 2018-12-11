@@ -27,11 +27,13 @@ export class FormService {
     return this.formBuilder.group({
       autostart: [ false ],
       minimalizeToTray: [ false ],
-      saveToFirebase: [ false ],
-      passwordLength: [ 10 ],
-      passwordUppercaseChars: [ false ],
-      passwordDigitChars: [ false ],
-      passwordSpecialChars: [ false ],
+      length: [ 10 ],
+      numbers: [ false ],
+      symbols: [ false ],
+      uppercase: [ false ],
+      excludeSimilarCharacters: [ false ],
+      exclude: [ '' ],
+      strict: [ false ],
     });
   }
 }

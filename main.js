@@ -16,7 +16,7 @@ function createWindow () {
 
   win.loadURL(`file://${__dirname}/dist/password-manager/index.html`);
 
-  win.webContents.openDevTools();
+  // win.webContents.openDevTools();
 
   // Event when the window is closed.
   win.on('closed', function () {

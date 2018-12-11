@@ -29,6 +29,10 @@ export class FormService {
       autostart: [ false ],
       minimalizeToTray: [ false ],
       saveToFirebase: [ false ],
+      passwordLength: [ 10 ],
+      passwordUppercaseChars: [ false ],
+      passwordDigitChars: [ false ],
+      passwordSpecialChars: [ false ],
     });
   }
 }

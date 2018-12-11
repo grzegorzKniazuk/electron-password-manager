@@ -21,3 +21,8 @@ body {
     font-weight: 700;
   }
 }
+
+// overwrite angular material dialog for settings dialog
+.settings-dialog-margin-top-0 > mat-dialog-container {
+  padding-top: 0;
+}

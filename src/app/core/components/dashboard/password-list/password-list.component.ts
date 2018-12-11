@@ -10,6 +10,7 @@ import {ResolveData} from '../../../interfaces/resolve-data';
 import {PasswordData} from '../../../interfaces/password-data';
 import {EditPasswordComponent} from './edit-password/edit-password.component';
 import {ConfirmModalComponent} from '../../../../shared/components/confirm-modal/confirm-modal.component';
+import {ToastMessages} from '../../../enums/toast-messages.enum';
 
 @Component({
   templateUrl: './password-list.component.html',
@@ -53,6 +54,8 @@ export class PasswordListComponent implements OnInit {
     this.fetchUserData();
     this.initPagination();
     this.initSort();
+    window.localStorage.setItem('test', 'aaaa');
+    console.log(window.localStorage.getItem('test'));
   }
 
   private fetchUserData(): void {
@@ -76,6 +79,7 @@ export class PasswordListComponent implements OnInit {
   public openSettingsModal(): void {
     this.matDialog.open(SettingsComponent, {
       width: '480px',
+      panelClass: 'settings-dialog-margin-top-0',
     });
   }
 
@@ -92,6 +96,7 @@ export class PasswordListComponent implements OnInit {
   public logout(): void {
     this.authService.logout().then(() => {
       this.router.navigate(['login']);
+      this.toastService.success(ToastMessages.logout);
     }).catch((error) => {
       this.toastService.error(error);
     });

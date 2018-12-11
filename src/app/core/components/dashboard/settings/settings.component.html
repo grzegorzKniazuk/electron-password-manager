@@ -1,13 +1,30 @@
-<app-form-header mat-dialog-title width="480px" left="-24px" top="-90px">Application settings</app-form-header>
+<app-form-header mat-dialog-title width="480px" left="-24px" top="-66px">Settings</app-form-header>
 <mat-dialog-content>
-  <form [formGroup]="settingsForm" autocomplete="off">
-    <mat-checkbox formControlName="autostart">Autostart</mat-checkbox>
-    <mat-hint>Check if You want to autostart application on system start.</mat-hint>
-    <mat-checkbox formControlName="minimalizeToTray">Minimalize to tray</mat-checkbox>
-    <mat-hint>Check if You want to minimalize application to tray by close button.</mat-hint>
-    <mat-checkbox formControlName="saveToFirebase">Save into cloud</mat-checkbox>
-    <mat-hint>Check if You want to save Your data into Google Firebase cloud database.</mat-hint>
-  </form>
+  <mat-tab-group mat-align-tabs="center">
+    <mat-tab label="Application settings">
+      <form autocomplete="off" [formGroup]="settingsForm" class="app-settings">
+        <mat-checkbox formControlName="autostart">Autostart</mat-checkbox>
+        <mat-hint>Check if you want the application to be run at system startup.</mat-hint>
+        <mat-checkbox formControlName="minimalizeToTray">Minimalize to tray</mat-checkbox>
+        <mat-hint>Check if you want the application to be closed to the tray.</mat-hint>
+        <mat-checkbox formControlName="saveToFirebase">Save into Firebase</mat-checkbox>
+        <mat-hint>Check if you want the data to be saved in the Firebase cloud.</mat-hint>
+      </form>
+    </mat-tab>
+    <mat-tab label="Password generator settings">
+      <form autocomplete="off" [formGroup]="settingsForm" class="generator-settings">
+        <mat-form-field>
+          <input matInput formControlName="passwordLength" type="text" placeholder="Password length">
+        </mat-form-field>
+        <mat-checkbox formControlName="passwordUppercaseChars">Uppercase chars.</mat-checkbox>
+        <mat-hint>Check if you want to use uppercase chars.</mat-hint>
+        <mat-checkbox formControlName="passwordDigitChars">Digits chars</mat-checkbox>
+        <mat-hint>Check if you want to use digits chars.</mat-hint>
+        <mat-checkbox formControlName="passwordSpecialChars">Special chars</mat-checkbox>
+        <mat-hint>Check if you want to use special chars.</mat-hint>
+      </form>
+    </mat-tab>
+  </mat-tab-group>
 </mat-dialog-content>
 <mat-dialog-actions align="center">
   <button type="submit" mat-raised-button color="primary" (click)="saveSettings()" [disabled]="settingsForm.invalid">SAVE SETTINGS</button>

@@ -1,8 +1,21 @@
 @import "./src/assets/styles/base.scss";
 
 form {
-  @include flex(flex, center, flex-start, column);
+  @include flex(flex, flex-start, flex-start, column);
   @include size(100%, 100%);
+  min-height: 265px;
+
+  &.app-settings {
+    mat-checkbox:first-of-type {
+      margin-top: 15px;
+    }
+  }
+
+  &.generator-settings {
+    mat-form-field {
+      margin: 15px 0 -5px 0;
+    }
+  }
 
   mat-hint {
     margin-left: 25px;

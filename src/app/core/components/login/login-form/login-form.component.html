@@ -1,19 +1,10 @@
 <div class="login-container">
-  <app-form-header width="320px">Login or register</app-form-header>
+  <app-form-header width="320px">Login</app-form-header>
   <form class="login-form" [formGroup]="authForm">
     <mat-form-field [hideRequiredMarker]="false">
-      <input matInput formControlName="email" placeholder="E-mail" type="email" required>
-      <mat-error>Email is required.</mat-error>
-    </mat-form-field>
-    <mat-form-field [hideRequiredMarker]="false">
       <input matInput formControlName="password" placeholder="Password" type="password" required>
-      <mat-error *ngIf="authForm.get('password').hasError('required')">Password is required.</mat-error>
-      <mat-error *ngIf="authForm.get('password').hasError('minlength') && !authForm.get('password').hasError('required')">Minimum length is 6 chars.</mat-error>
+      <mat-error>Password is required.</mat-error>
     </mat-form-field>
-    <div class="button-container">
-      <button type="submit" mat-raised-button color="primary" (click)="login()" [disabled]="authForm.invalid">LOG IN</button>
-      <button mat-fab color="primary">OR</button>
-      <button type="button" mat-raised-button color="accent" (click)="register()" [disabled]="authForm.invalid">REGISTER</button>
-    </div>
+    <button type="submit" mat-raised-button color="primary" (click)="login()" [disabled]="authForm.invalid">LOG IN</button>
   </form>
 </div>

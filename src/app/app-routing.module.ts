@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { IntroComponent } from './core/components/intro/intro.component';
-import {UserDataResolve} from './core/resolves/user-data.resolve';
 
 const routes: Routes = [
   {
@@ -15,9 +14,6 @@ const routes: Routes = [
   {
     path: 'dashboard',
     loadChildren: './core/components/dashboard/dashboard.module#DashboardModule',
-    resolve: {
-      userData: UserDataResolve
-    },
   },
 ];
 

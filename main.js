@@ -8,6 +8,9 @@ function createWindow () {
     height: 768,
     icon: `file://${__dirname}/dist/assets/images/key.ico`,
     autoHideMenuBar: true,
+    webPreferences: {
+      nodeIntegration: false,
+    },
   });
 
 

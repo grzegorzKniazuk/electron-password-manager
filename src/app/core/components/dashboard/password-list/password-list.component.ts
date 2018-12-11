@@ -1,15 +1,11 @@
-import {ChangeDetectionStrategy, Component, OnInit, ViewChild} from '@angular/core';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit, ViewChild} from '@angular/core';
 import {MatBottomSheet, MatDialog, MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
 import {AddPasswordComponent} from './add-password/add-password.component';
-import {ToastService} from '../../../services/toast.service';
-import {AuthService} from '../../../services/auth.service';
-import {ActivatedRoute, Router} from '@angular/router';
 import {SettingsComponent} from '../settings/settings.component';
-import {UserInfo} from 'firebase';
-import {ResolveData} from '../../../interfaces/resolve-data';
 import {PasswordData} from '../../../interfaces/password-data';
 import {EditPasswordComponent} from './edit-password/edit-password.component';
 import {ConfirmModalComponent} from '../../../../shared/components/confirm-modal/confirm-modal.component';
+import {ToastService} from '../../../services/toast.service';
 import {ToastMessages} from '../../../enums/toast-messages.enum';
 
 @Component({
@@ -21,47 +17,26 @@ export class PasswordListComponent implements OnInit {
 
   @ViewChild(MatPaginator) private paginator: MatPaginator;
   @ViewChild(MatSort) private sort: MatSort;
-  public user: UserInfo;
-  public data: PasswordData[] = [
-    { id: '1', refersTo: 'gmail.com', login: 'sampleLogin', password: 'samplePassword' },
-    { id: '2', refersTo: 'www.gmail.com', login: 'sampleLogin', password: 'samplePassword' },
-    { id: '3', refersTo: 'gmail.com', login: 'sampleLogin', password: 'samplePassword' },
-    { id: '4', refersTo: 'www.gmail.com', login: 'sampleLogin', password: 'samplePassword' },
-    { id: '5', refersTo: 'www.gmail.com', login: 'sampleLogin', password: 'samplePassword' },
-    { id: '6', refersTo: 'www.gmail.com', login: 'sampleLogin', password: 'samplePassword' },
-    { id: '7', refersTo: 'www.gmail.com', login: 'sampleLogin', password: 'samplePassword' },
-    { id: '8', refersTo: 'www.gmail.com', login: 'sampleLogin', password: 'samplePassword' },
-    { id: '9', refersTo: 'www.gmail.com', login: 'sampleLogin', password: 'samplePassword' },
-    { id: '10', refersTo: 'www.gmail.com', login: 'sampleLogin', password: 'samplePassword' },
-    { id: '11', refersTo: 'www.gmail.com', login: 'sampleLogin', password: 'samplePassword' },
-    { id: '12', refersTo: 'www.gmail.com', login: 'sampleLogin', password: 'samplePassword' },
-    { id: '13', refersTo: 'www.gmail.com', login: 'sampleLogin', password: 'samplePassword' },
-    { id: '14', refersTo: 'www.gmail.com', login: 'sampleLogin', password: 'samplePassword' },
-    { id: '15', refersTo: 'www.gmail.com', login: 'sampleLogin', password: 'samplePassword' },
-  ];
-  public dataSource = new MatTableDataSource<PasswordData>(this.data);
+  public data: PasswordData[] = [];
+  public dataSource: MatTableDataSource<PasswordData>;
   public readonly columnList: string[] = [ 'website', 'login', 'password', 'actions' ];
-  public passwordId = '';
+  public passwordId: number;
 
   constructor(private matDialog: MatDialog,
               private matBottomSheet: MatBottomSheet,
               private toastService: ToastService,
-              private authService: AuthService,
-              private activatedRoute: ActivatedRoute,
-              private router: Router) { }
+              private changeDetectorRef: ChangeDetectorRef) { }
 
-  ngOnInit(): void {
-    this.fetchUserData();
+  ngOnInit() {
+    this.initData();
     this.initPagination();
     this.initSort();
-    window.localStorage.setItem('test', 'aaaa');
-    console.log(window.localStorage.getItem('test'));
   }
 
-  private fetchUserData(): void {
-    this.activatedRoute.data.subscribe((data: ResolveData) => {
-      this.user = data.userData;
-    });
+  private initData(): void {
+    this.data = JSON.parse(window.localStorage.getItem('data'));
+    this.dataSource = new MatTableDataSource<PasswordData>(this.data);
+    this.changeDetectorRef.detectChanges();
   }
 
   private initSort(): void {
@@ -73,7 +48,12 @@ export class PasswordListComponent implements OnInit {
   }
 
   public openNewPasswordModal(): void {
-    this.matDialog.open(AddPasswordComponent);
+    this.matDialog.open(AddPasswordComponent).afterClosed().subscribe((response: string) => {
+      if (response === 'ok') {
+        this.initData();
+        this.toastService.success(ToastMessages.credentialsSaved);
+      }
+    });
   }
 
   public openSettingsModal(): void {
@@ -86,20 +66,23 @@ export class PasswordListComponent implements OnInit {
   public openEditModal(element: PasswordData): void {
     this.matDialog.open(EditPasswordComponent, {
       data: element,
+    }).afterClosed().subscribe((response: string) => {
+      if (response === 'ok') {
+
+      }
     });
   }
 
   public openConfirmDeleteModal(element: PasswordData): void {
-    this.matBottomSheet.open(ConfirmModalComponent);
-  }
-
-  public logout(): void {
-    this.authService.logout().then(() => {
-      this.router.navigate(['login']);
-      this.toastService.success(ToastMessages.logout);
-    }).catch((error) => {
-      this.toastService.error(error);
+    this.matBottomSheet.open(ConfirmModalComponent).afterDismissed().subscribe((response: string) => {
+      if (response === 'confirm') {
+        this.data = this.data.filter((password: PasswordData) => password.id !== element.id);
+        window.localStorage.setItem('data', JSON.stringify(this.data));
+        this.initData();
+        this.toastService.success(ToastMessages.credentialsDeleted);
+      }
     });
+
   }
 
   public applyFilter(filterValue: string): void {
@@ -108,5 +91,15 @@ export class PasswordListComponent implements OnInit {
 
   public showPassword(element: PasswordData): void {
     this.passwordId = element.id;
+  }
+
+  public copyPassword(element: PasswordData): void {
+    const textArea = document.createElement('textarea');
+    textArea.value = element.password;
+    document.body.appendChild(textArea);
+    textArea.select();
+    document.execCommand('copy');
+    textArea.remove();
+    this.toastService.success(ToastMessages.successfullyCopied);
   }
 }

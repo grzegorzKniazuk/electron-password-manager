@@ -10,14 +10,13 @@ export class FormService {
 
   public get authForm(): FormGroup {
     return this.formBuilder.group({
-      email: [ '', [ Validators.required, Validators.email ] ],
-      password: [ '', [ Validators.required, Validators.minLength(6) ] ],
+      password: [ '', [ Validators.required ] ],
     });
   }
 
   public get credentialsForm(): FormGroup {
     return this.formBuilder.group({
-      date: Date.now(),
+      id: Date.now(),
       refersTo: [ '', Validators.required ],
       login: [ '', Validators.required ],
       password: [ '', Validators.required ],

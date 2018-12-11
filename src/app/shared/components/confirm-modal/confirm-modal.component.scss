@@ -1,0 +1,32 @@
+@import "./src/assets/styles/base.scss";
+
+.confirm-container {
+  @include flex(flex, center, center, column);
+  padding: 5px;
+
+  p {
+    margin-bottom: 15px;
+  }
+
+  .button-container {
+
+    button {
+      &:first-of-type {
+        padding-right: 30px;
+        margin-right: -15px;
+      }
+
+      &:nth-of-type(2) {
+        cursor: default;
+        user-select: none;
+        pointer-events: none;
+        z-index: 1001 !important;
+      }
+
+      &:last-of-type {
+        padding-left: 30px;
+        margin-left: -15px;
+      }
+    }
+  }
+}

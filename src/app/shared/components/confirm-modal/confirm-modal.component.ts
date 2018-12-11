@@ -1,15 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import {ChangeDetectionStrategy, Component} from '@angular/core';
+import {MatBottomSheetRef} from '@angular/material';
 
 @Component({
   selector: 'app-confirm-modal',
   templateUrl: './confirm-modal.component.html',
-  styleUrls: ['./confirm-modal.component.scss']
+  styleUrls: ['./confirm-modal.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ConfirmModalComponent implements OnInit {
+export class ConfirmModalComponent {
 
-  constructor() { }
+  constructor(private matBottomSheetRef: MatBottomSheetRef) {}
 
-  ngOnInit() {
+  public response(response: string): void {
+    this.matBottomSheetRef.dismiss(response);
   }
-
 }

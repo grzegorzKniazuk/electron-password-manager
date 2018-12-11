@@ -1,5 +1,5 @@
 export interface PasswordData {
-  id: string;
+  id: number;
   refersTo: string;
   login: string;
   password: string;

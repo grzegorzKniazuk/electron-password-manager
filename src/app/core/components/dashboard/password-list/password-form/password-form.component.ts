@@ -1,10 +1,9 @@
-import {ChangeDetectionStrategy, Component, HostListener, Input, OnInit} from '@angular/core';
+import { ChangeDetectionStrategy, Component, HostListener, Input, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { FormService } from '../../../../services/form.service';
-import {PasswordData} from '../../../../interfaces/password-data';
-import {MatDialogRef} from '@angular/material';
-import {GeneratorSettings} from '../../../../interfaces/generator-settings';
-import * as PasswordGenerator from '../../../../../../../node_modules/generate-password';
+import { PasswordData} from '../../../../interfaces/password-data';
+import { MatDialogRef} from '@angular/material';
+import { GeneratorSettings } from '../../../../interfaces/generator-settings';
 
 @Component({
   selector: 'app-password-form',
@@ -64,9 +63,6 @@ export class PasswordFormComponent implements OnInit {
   }
 
   public generatePassword(): void {
-    console.log(PasswordGenerator.generate({
-      length: 10,
-      numbers: false,
-    }));
+
   }
 }

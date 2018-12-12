@@ -4,7 +4,6 @@ import { FormService } from '../../../../services/form.service';
 import {PasswordData} from '../../../../interfaces/password-data';
 import {MatDialogRef} from '@angular/material';
 import {GeneratorSettings} from '../../../../interfaces/generator-settings';
-import * as PasswordGenerator from '../../../../../../../node_modules/generate-password';
 
 @Component({
   selector: 'app-password-form',
@@ -64,9 +63,5 @@ export class PasswordFormComponent implements OnInit {
   }
 
   public generatePassword(): void {
-    console.log(PasswordGenerator.generate({
-      length: 10,
-      numbers: false,
-    }));
   }
 }

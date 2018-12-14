@@ -1,12 +1,14 @@
 import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit, ViewChild} from '@angular/core';
 import {MatBottomSheet, MatDialog, MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
 import {AddPasswordComponent} from './add-password/add-password.component';
-import {SettingsComponent} from '../settings/settings.component';
 import {PasswordData} from '../../../interfaces/password-data';
 import {EditPasswordComponent} from './edit-password/edit-password.component';
 import {ConfirmModalComponent} from '../../../../shared/components/confirm-modal/confirm-modal.component';
 import {ToastService} from '../../../services/toast.service';
 import {ToastMessages} from '../../../enums/toast-messages.enum';
+import {ApplicationSettingsComponent} from '../settings/application-settings/application-settings.component';
+import {GeneratorSettingsComponent} from '../settings/generator-settings/generator-settings.component';
+import {BackupSettingsComponent} from '../settings/backup-settings/backup-settings.component';
 
 @Component({
   templateUrl: './password-list.component.html',
@@ -58,10 +60,29 @@ export class PasswordListComponent implements OnInit {
     });
   }
 
-  public openSettingsModal(): void {
-    this.matDialog.open(SettingsComponent, {
-      width: '480px',
-      panelClass: 'settings-dialog-margin-top-0',
+  public openApplicationSettingsModal(): void {
+    this.matDialog.open(ApplicationSettingsComponent, {
+      width: '400px',
+    }).afterClosed().subscribe((response: string) => {
+      if (response === 'saved') {
+        this.toastService.success(ToastMessages.settingsSaved);
+      }
+    });
+  }
+
+  public openGeneratorSettingsModal(): void {
+    this.matDialog.open(GeneratorSettingsComponent, {
+      width: '550px',
+    }).afterClosed().subscribe((response: string) => {
+      if (response === 'saved') {
+        this.toastService.success(ToastMessages.settingsSaved);
+      }
+    });
+  }
+
+  public openBackupSettingsModal(): void {
+    this.matDialog.open(BackupSettingsComponent, {
+      width: '500px',
     });
   }
 
@@ -69,7 +90,7 @@ export class PasswordListComponent implements OnInit {
     this.matDialog.open(EditPasswordComponent, {
       data: element,
     }).afterClosed().subscribe((response: string) => {
-      if (response === 'ok') {
+      if (response === 'saved') {
         this.initData();
         this.toastService.success(ToastMessages.credentialsUpdated);
       }
@@ -85,7 +106,6 @@ export class PasswordListComponent implements OnInit {
         this.toastService.success(ToastMessages.credentialsDeleted);
       }
     });
-
   }
 
   public applyFilter(filterValue: string): void {

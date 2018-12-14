@@ -2,7 +2,7 @@
   <app-form-header width="320px">Login</app-form-header>
   <form class="login-form" [formGroup]="authForm">
     <mat-form-field [hideRequiredMarker]="false">
-      <input matInput formControlName="password" placeholder="Password" type="password" required>
+      <input matInput formControlName="password" placeholder="Password" type="password" required autofocus>
       <mat-error>Password is required.</mat-error>
     </mat-form-field>
     <button type="submit" mat-raised-button color="primary" (click)="login()" [disabled]="authForm.invalid">LOG IN</button>

@@ -7,9 +7,11 @@ import { DashboardRoutingModule } from './dashboard-routing.module';
 import { AddPasswordComponent } from './password-list/add-password/add-password.component';
 import { MaterialModule } from '../../../material.module';
 import { PasswordFormComponent } from './password-list/password-form/password-form.component';
-import { SettingsComponent } from './settings/settings.component';
 import { SharedModule } from '../../../shared/shared.module';
 import { EditPasswordComponent } from './password-list/edit-password/edit-password.component';
+import { ApplicationSettingsComponent } from './settings/application-settings/application-settings.component';
+import { GeneratorSettingsComponent } from './settings/generator-settings/generator-settings.component';
+import { BackupSettingsComponent } from './settings/backup-settings/backup-settings.component';
 
 @NgModule({
   declarations: [
@@ -17,13 +19,17 @@ import { EditPasswordComponent } from './password-list/edit-password/edit-passwo
     PasswordListComponent,
     AddPasswordComponent,
     PasswordFormComponent,
-    SettingsComponent,
     EditPasswordComponent,
+    ApplicationSettingsComponent,
+    GeneratorSettingsComponent,
+    BackupSettingsComponent,
   ],
   entryComponents: [
     AddPasswordComponent,
-    SettingsComponent,
     EditPasswordComponent,
+    ApplicationSettingsComponent,
+    GeneratorSettingsComponent,
+    BackupSettingsComponent,
   ],
   imports: [
     CommonModule,

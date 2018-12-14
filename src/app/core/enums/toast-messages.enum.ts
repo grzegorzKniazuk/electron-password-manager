@@ -7,4 +7,5 @@ export enum ToastMessages {
   credentialsDeleted = 'The credentials has been deleted successfully',
   successfullyCopied = 'Successfully copied to the clipboard',
   settingsSaved = 'Settings saved successfully',
+  error = 'Unspecified error',
 }

@@ -1,0 +1,28 @@
+<app-form-header mat-dialog-title width="550px" left="-24px" top="-66px">Password generator settings</app-form-header>
+<mat-dialog-content>
+  <form autocomplete="off" [formGroup]="generatorSettingsForm" class="generator-settings">
+    <mat-form-field>
+      <input matInput formControlName="length" type="text" placeholder="Password length" matTooltip="Length of password">
+      <mat-error *ngIf="generatorSettingsForm.get('length').hasError('required')">This field is required</mat-error>
+      <mat-error *ngIf="generatorSettingsForm.get('length').hasError('min') && !generatorSettingsForm.get('length').hasError('required')">The minimum value is 1</mat-error>
+      <mat-error *ngIf="generatorSettingsForm.get('length').hasError('numbersOnly') && !generatorSettingsForm.get('length').hasError('min') && !generatorSettingsForm.get('length').hasError('required')">Only numbers are allowed</mat-error>
+    </mat-form-field>
+    <mat-checkbox formControlName="numbers">Digits chars</mat-checkbox>
+    <mat-hint>Check if you want to use digits chars.</mat-hint>
+    <mat-checkbox formControlName="symbols">Special chars</mat-checkbox>
+    <mat-hint>Check if you want to use special chars like {{ symbols }}</mat-hint>
+    <mat-checkbox formControlName="uppercase">Uppercase chars</mat-checkbox>
+    <mat-hint>Check if you want to use uppercase chars.</mat-hint>
+    <mat-checkbox formControlName="excludeSimilarCharacters">Uppercase chars</mat-checkbox>
+    <mat-hint>Check if you want to exclude similar chars, like 'i' and 'l'.</mat-hint>
+    <mat-form-field>
+      <input matInput formControlName="exclude" type="text" placeholder="Characters to be excluded from password" matTooltip="Characters to be excluded from password">
+    </mat-form-field>
+    <mat-checkbox formControlName="strict">Strict mode</mat-checkbox>
+    <mat-hint>Check if You want to password must include at least one character from each pool.</mat-hint>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions align="center">
+  <button type="submit" mat-raised-button color="primary" (click)="saveSettings()" [disabled]="generatorSettingsForm.invalid">SAVE SETTINGS</button>
+  <button type="button" mat-raised-button mat-dialog-close color="warn">ABORT</button>
+</mat-dialog-actions>

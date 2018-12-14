@@ -1,0 +1,10 @@
+@import "./src/assets/styles/base.scss";
+
+form {
+  @include flex(flex, flex-start, flex-start, column);
+  @include size(100%, 100%);
+
+  mat-hint {
+    margin-left: 25px;
+  }
+}

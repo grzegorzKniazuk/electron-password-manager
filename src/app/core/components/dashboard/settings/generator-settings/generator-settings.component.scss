@@ -3,18 +3,13 @@
 form {
   @include flex(flex, flex-start, flex-start, column);
   @include size(100%, 100%);
-  min-height: 265px;
 
-  &.app-settings {
-    mat-checkbox:first-of-type {
-      margin-top: 15px;
-    }
+  mat-form-field:first-of-type {
+    width: 30%;
   }
 
-  &.generator-settings {
-    mat-form-field {
-      margin: 15px 0 -5px 0;
-    }
+  mat-form-field:last-of-type {
+    width: 80%;
   }
 
   mat-hint {

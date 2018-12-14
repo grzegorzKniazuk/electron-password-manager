@@ -1,0 +1,13 @@
+<app-form-header mat-dialog-title width="400px" left="-24px" top="-66px">Application settings</app-form-header>
+<mat-dialog-content>
+  <form autocomplete="off" [formGroup]="applicationSettingsForm">
+    <mat-checkbox formControlName="autostart">Autostart</mat-checkbox>
+    <mat-hint>Check if you want the application to be run at system startup.</mat-hint>
+    <mat-checkbox formControlName="minimalizeToTray">Minimalize to tray</mat-checkbox>
+    <mat-hint>Check if you want the application to be closed to the tray.</mat-hint>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions align="center">
+  <button type="submit" mat-raised-button color="primary" (click)="saveApplicationSettings()" [disabled]="applicationSettingsForm.invalid">SAVE SETTINGS</button>
+  <button type="button" mat-raised-button mat-dialog-close color="warn">ABORT</button>
+</mat-dialog-actions>

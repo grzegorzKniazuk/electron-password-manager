@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { NumberOnlyValidator } from '../../shared/validators/numbers-only.validator';
 
 @Injectable({
   providedIn: 'root',
@@ -23,11 +24,16 @@ export class FormService {
     });
   }
 
-  public get settingsForm(): FormGroup {
+  public get applicationSettingsForm(): FormGroup {
     return this.formBuilder.group({
       autostart: [ false ],
       minimalizeToTray: [ false ],
-      length: [ 10 ],
+    });
+  }
+
+  public get generatorSettingsForm(): FormGroup {
+    return this.formBuilder.group({
+      length: [ 10, [ Validators.required, Validators.min(1), NumberOnlyValidator ] ],
       numbers: [ false ],
       symbols: [ false ],
       uppercase: [ false ],

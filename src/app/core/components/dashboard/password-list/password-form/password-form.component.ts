@@ -3,7 +3,8 @@ import { FormGroup } from '@angular/forms';
 import { FormService } from '../../../../services/form.service';
 import {PasswordData} from '../../../../interfaces/password-data';
 import {MatDialogRef} from '@angular/material';
-import {GeneratorSettings} from '../../../../interfaces/generator-settings';
+import {Generator} from '../../../../models/generator.model';
+import {ToastService} from '../../../../services/toast.service';
 
 @Component({
   selector: 'app-password-form',
@@ -11,15 +12,19 @@ import {GeneratorSettings} from '../../../../interfaces/generator-settings';
   styleUrls: ['./password-form.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class PasswordFormComponent implements OnInit {
+export class PasswordFormComponent extends Generator implements OnInit {
 
   @Input() public credentialsData: PasswordData;
   public credentialsForm: FormGroup;
   public passwordInputFocus = false;
-  private passwordGeneratorSettings: GeneratorSettings;
+  private password: string;
   private data: PasswordData[] = JSON.parse(window.localStorage.getItem('data'));
 
-  constructor(private formService: FormService, private matDialogRef: MatDialogRef<PasswordFormComponent>) { }
+  constructor(private formService: FormService,
+              private toastService: ToastService,
+              private matDialogRef: MatDialogRef<PasswordFormComponent>) {
+    super();
+  }
 
   ngOnInit() {
     this.initForm();
@@ -48,8 +53,9 @@ export class PasswordFormComponent implements OnInit {
     }
   }
 
+  @HostListener('document:keydown.enter')
   public updateCredentials(): void {
-    if (this.credentialsForm.valid) {
+    if (this.credentialsData && this.credentialsForm.valid) {
       this.data = this.data.filter((password: PasswordData) => password.id !== this.credentialsData.id);
       this.data.push({
         id: this.credentialsData.id,
@@ -58,10 +64,18 @@ export class PasswordFormComponent implements OnInit {
         password: this.credentialsForm.get('password').value,
       });
       window.localStorage.setItem('data', JSON.stringify(this.data));
-      this.matDialogRef.close('ok');
+      this.matDialogRef.close('saved');
     }
   }
 
+  @HostListener('document:keydown.esc')
+  private closeDialog(): void {
+    this.matDialogRef.close();
+  }
+
   public generatePassword(): void {
+    this.password = super.generateNewPassword();
+    this.credentialsForm.get('password').setValue(this.password);
+    this.toastService.success(`The password generated is ${this.password}`);
   }
 }

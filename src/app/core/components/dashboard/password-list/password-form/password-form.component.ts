@@ -78,4 +78,8 @@ export class PasswordFormComponent extends Generator implements OnInit {
     this.credentialsForm.get('password').setValue(this.password);
     this.toastService.success(`The password generated is ${this.password}`);
   }
+
+  public restorePreviousPassword(): void {
+
+  }
 }

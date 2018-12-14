@@ -9,6 +9,7 @@ import {ToastMessages} from '../../../enums/toast-messages.enum';
 import {ApplicationSettingsComponent} from '../settings/application-settings/application-settings.component';
 import {GeneratorSettingsComponent} from '../settings/generator-settings/generator-settings.component';
 import {BackupSettingsComponent} from '../settings/backup-settings/backup-settings.component';
+import { ApplicationInfoComponent } from '../settings/application-info/application-info.component';
 
 @Component({
   templateUrl: './password-list.component.html',
@@ -67,6 +68,12 @@ export class PasswordListComponent implements OnInit {
       if (response === 'saved') {
         this.toastService.success(ToastMessages.settingsSaved);
       }
+    });
+  }
+
+  public openApplicationInfoModal(): void {
+    this.matDialog.open(ApplicationInfoComponent, {
+      width: '400px',
     });
   }
 

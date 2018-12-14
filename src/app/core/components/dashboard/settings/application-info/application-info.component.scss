@@ -1,0 +1,14 @@
+@import "./src/assets/styles/base.scss";
+
+mat-dialog-content {
+  @include flex(flex, center, center, column);
+  img {
+    width: 100px;
+  }
+
+  strong {
+    margin-top: 15px;
+  }
+}
+
+

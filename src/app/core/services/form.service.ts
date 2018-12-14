@@ -28,6 +28,7 @@ export class FormService {
     return this.formBuilder.group({
       autostart: [ false ],
       minimalizeToTray: [ false ],
+      autoLogin: [ false ],
     });
   }
 

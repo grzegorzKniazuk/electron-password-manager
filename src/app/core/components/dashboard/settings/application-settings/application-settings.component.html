@@ -1,6 +1,8 @@
 <app-form-header mat-dialog-title width="400px" left="-24px" top="-66px">Application settings</app-form-header>
 <mat-dialog-content>
   <form autocomplete="off" [formGroup]="applicationSettingsForm">
+    <mat-checkbox formControlName="autoLogin">Log in automatically</mat-checkbox>
+    <mat-hint>Check if you want to be logged in automatically.</mat-hint>
     <mat-checkbox formControlName="autostart">Autostart</mat-checkbox>
     <mat-hint>Check if you want the application to be run at system startup.</mat-hint>
     <mat-checkbox formControlName="minimalizeToTray">Minimalize to tray</mat-checkbox>

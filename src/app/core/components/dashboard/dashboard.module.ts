@@ -12,6 +12,7 @@ import { EditPasswordComponent } from './password-list/edit-password/edit-passwo
 import { ApplicationSettingsComponent } from './settings/application-settings/application-settings.component';
 import { GeneratorSettingsComponent } from './settings/generator-settings/generator-settings.component';
 import { BackupSettingsComponent } from './settings/backup-settings/backup-settings.component';
+import { ApplicationInfoComponent } from './settings/application-info/application-info.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { BackupSettingsComponent } from './settings/backup-settings/backup-setti
     ApplicationSettingsComponent,
     GeneratorSettingsComponent,
     BackupSettingsComponent,
+    ApplicationInfoComponent,
   ],
   entryComponents: [
     AddPasswordComponent,
@@ -30,6 +32,7 @@ import { BackupSettingsComponent } from './settings/backup-settings/backup-setti
     ApplicationSettingsComponent,
     GeneratorSettingsComponent,
     BackupSettingsComponent,
+    ApplicationInfoComponent,
   ],
   imports: [
     CommonModule,

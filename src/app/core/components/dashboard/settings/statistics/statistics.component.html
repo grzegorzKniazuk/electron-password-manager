@@ -1,0 +1,8 @@
+<app-form-header mat-dialog-title width="300px" left="-24px" top="-60px">Statistics</app-form-header>
+<mat-dialog-content align="center">
+  <div>Credentials count: {{ (dataService.appInformations$ | async).credentialsCount }}</div>
+  <div>Generated passwords: {{ (dataService.appInformations$ | async).passwordGenerated }}</div>
+</mat-dialog-content>
+<mat-dialog-actions align="center">
+  <button mat-raised-button mat-dialog-close color="primary">OK</button>
+</mat-dialog-actions>

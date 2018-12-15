@@ -11,8 +11,12 @@ import { GeneratorSettingsComponent } from '../settings/generator-settings/gener
 import { BackupSettingsComponent } from '../settings/backup-settings/backup-settings.component';
 import { ApplicationInfoComponent } from '../settings/application-info/application-info.component';
 import { Generator } from '../../../models/generator.model';
-import { HelpComponent } from '../../../../shared/components/help/help.component';
+import { HelpComponent } from '../settings/help/help.component';
 import { ApplicationSettings } from '../../../interfaces/application-settings';
+import { StatisticsComponent } from '../settings/statistics/statistics.component';
+import { VersionInfoComponent } from '../settings/version-info/version-info.component';
+import { DataService } from '../../../services/data.service';
+import { AppInformations } from '../../../interfaces/app-informations';
 
 @Component({
   templateUrl: './password-list.component.html',
@@ -23,6 +27,13 @@ export class PasswordListComponent extends Generator implements OnInit, AfterCon
 
   @ViewChild(MatPaginator) private paginator: MatPaginator;
   @ViewChild(MatSort) private sort: MatSort;
+
+  private readonly defaultInfo: AppInformations = {
+    version: '1.0.0',
+    credentialsCount: 0,
+    passwordGenerated: 0,
+  };
+
   public data: PasswordData[] = [];
   public dataSource: MatTableDataSource<PasswordData>;
   public readonly columnList: string[] = [ 'date', 'website', 'login', 'password', 'actions' ];
@@ -32,6 +43,7 @@ export class PasswordListComponent extends Generator implements OnInit, AfterCon
   private pageSize: number;
 
   constructor(private matDialog: MatDialog,
+              private dataService: DataService,
               private matBottomSheet: MatBottomSheet,
               private toastService: ToastService,
               private changeDetectorRef: ChangeDetectorRef) {
@@ -39,6 +51,7 @@ export class PasswordListComponent extends Generator implements OnInit, AfterCon
   }
 
   ngOnInit() {
+    this.checkAppVersion();
     this.initSettings();
     this.initData();
     this.initPagination();
@@ -96,6 +109,8 @@ export class PasswordListComponent extends Generator implements OnInit, AfterCon
       if (response === 'saved') {
         this.toastService.success(ToastMessages.settingsSaved);
       }
+      this.initSettings();
+      this.changeDetectorRef.detectChanges();
     });
   }
 
@@ -143,9 +158,21 @@ export class PasswordListComponent extends Generator implements OnInit, AfterCon
     });
   }
 
-  openHelpModal(): void {
+  public openHelpModal(): void {
     this.matDialog.open(HelpComponent, {
       width: '500px',
+    });
+  }
+
+  public openStatisticsModal(): void {
+    this.matDialog.open(StatisticsComponent, {
+      width: '300px',
+    });
+  }
+
+  public openUpdatesModal(): void {
+    this.matDialog.open(VersionInfoComponent, {
+      width: '400px',
     });
   }
 
@@ -174,5 +201,13 @@ export class PasswordListComponent extends Generator implements OnInit, AfterCon
   public generateAndCopyRandomPassword(): void {
     this.randomGeneratedPassword = super.generateNewPassword();
     this.copyPassword(this.randomGeneratedPassword, true);
+  }
+
+  private checkAppVersion(): void {
+    console.log(JSON.parse(localStorage.getItem('app-info')));
+    if (!JSON.parse(localStorage.getItem('app-info'))) {
+      localStorage.setItem('app-info', JSON.stringify(this.defaultInfo));
+    }
+    this.dataService.appInformations$.next(JSON.parse(localStorage.getItem('app-info')));
   }
 }

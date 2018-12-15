@@ -6,7 +6,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PasswordHidePipe } from './pipes/password-hide.pipe';
 import { ConfirmModalComponent } from './components/confirm-modal/confirm-modal.component';
 import { SnackBarComponent } from './components/snack-bar/snack-bar.component';
-import { HelpComponent } from './components/help/help.component';
 
 @NgModule({
   imports: [
@@ -20,12 +19,10 @@ import { HelpComponent } from './components/help/help.component';
     PasswordHidePipe,
     ConfirmModalComponent,
     SnackBarComponent,
-    HelpComponent,
   ],
   entryComponents: [
     ConfirmModalComponent,
     SnackBarComponent,
-    HelpComponent,
   ],
   exports: [
     FormHeaderComponent,
@@ -34,7 +31,6 @@ import { HelpComponent } from './components/help/help.component';
     PasswordHidePipe,
     ConfirmModalComponent,
     SnackBarComponent,
-    HelpComponent,
   ],
 })
 export class SharedModule { }

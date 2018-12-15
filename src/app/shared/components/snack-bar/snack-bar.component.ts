@@ -17,8 +17,12 @@ export class SnackBarComponent implements OnInit {
   }
 
   private transformMessage(): void {
-    this.password = this.message.match(/password\s.+(?=\shas)/)[0];
-    this.password = this.password.split(' ')[1];
+    if (this.message.match(/password\s.+(?=\shas)/)) {
+      this.password = this.message.match(/password\s.+(?=\shas)/)[0];
+      this.password = this.password.split(' ')[1];
+    } else {
+      this.password = this.message.match(/\w+$/)[0];
+    }
     this.messageElements = this.message.split(this.password);
   }
 }

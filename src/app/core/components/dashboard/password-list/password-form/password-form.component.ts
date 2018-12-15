@@ -94,7 +94,7 @@ export class PasswordFormComponent extends Generator implements OnInit {
     this.credentialsForm.get('password').setValue(this.password);
     this.credentialsForm.get('password').markAsDirty();
     if (this.applicationSettings && this.applicationSettings.showGeneratedPassword) {
-      this.toastService.success(`The password generated is ${this.password}`);
+      this.toastService.successWithComponent(`The password generated is ${this.password}`);
     }
     this.isPasswordWasGenerated = true;
   }

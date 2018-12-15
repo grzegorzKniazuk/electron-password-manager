@@ -13,6 +13,9 @@ import { ApplicationSettingsComponent } from './settings/application-settings/ap
 import { GeneratorSettingsComponent } from './settings/generator-settings/generator-settings.component';
 import { BackupSettingsComponent } from './settings/backup-settings/backup-settings.component';
 import { ApplicationInfoComponent } from './settings/application-info/application-info.component';
+import { StatisticsComponent } from './settings/statistics/statistics.component';
+import { HelpComponent } from './settings/help/help.component';
+import { VersionInfoComponent } from './settings/version-info/version-info.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +28,9 @@ import { ApplicationInfoComponent } from './settings/application-info/applicatio
     GeneratorSettingsComponent,
     BackupSettingsComponent,
     ApplicationInfoComponent,
+    StatisticsComponent,
+    HelpComponent,
+    VersionInfoComponent,
   ],
   entryComponents: [
     AddPasswordComponent,
@@ -33,6 +39,9 @@ import { ApplicationInfoComponent } from './settings/application-info/applicatio
     GeneratorSettingsComponent,
     BackupSettingsComponent,
     ApplicationInfoComponent,
+    StatisticsComponent,
+    HelpComponent,
+    VersionInfoComponent,
   ],
   imports: [
     CommonModule,

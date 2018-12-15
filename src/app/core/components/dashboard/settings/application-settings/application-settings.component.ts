@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, HostListener, OnInit, Renderer2 } f
 import { FormService } from '../../../../services/form.service';
 import { FormGroup } from '@angular/forms';
 import { MatDialogRef } from '@angular/material';
-import {ApplicationSettings} from '../../../../interfaces/application-settings';
+import { ApplicationSettings } from '../../../../interfaces/application-settings';
 
 @Component({
   selector: 'app-application-settings',

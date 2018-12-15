@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
+import { AfterContentInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { MatBottomSheet, MatDialog, MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import { AddPasswordComponent } from './add-password/add-password.component';
 import { PasswordData } from '../../../interfaces/password-data';
@@ -19,7 +19,7 @@ import { ApplicationSettings } from '../../../interfaces/application-settings';
   styleUrls: ['./password-list.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class PasswordListComponent extends Generator implements OnInit {
+export class PasswordListComponent extends Generator implements OnInit, AfterContentInit {
 
   @ViewChild(MatPaginator) private paginator: MatPaginator;
   @ViewChild(MatSort) private sort: MatSort;
@@ -39,15 +39,20 @@ export class PasswordListComponent extends Generator implements OnInit {
   }
 
   ngOnInit() {
-    this.welcome();
     this.initSettings();
     this.initData();
     this.initPagination();
     this.initSort();
   }
 
+  public ngAfterContentInit(): void {
+    this.welcome();
+  }
+
   private welcome(): void {
-    this.toastService.success(ToastMessages.welcomeBack);
+    setTimeout(() => {
+      this.toastService.success(ToastMessages.welcomeBack);
+    });
   }
 
   private initSettings(): void {
@@ -86,7 +91,7 @@ export class PasswordListComponent extends Generator implements OnInit {
 
   public openApplicationSettingsModal(): void {
     this.matDialog.open(ApplicationSettingsComponent, {
-      width: '400px',
+      width: '450px',
     }).afterClosed().subscribe((response: string) => {
       if (response === 'saved') {
         this.toastService.success(ToastMessages.settingsSaved);

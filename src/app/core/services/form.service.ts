@@ -30,6 +30,7 @@ export class FormService {
       autostart: [ false ],
       minimalizeToTray: [ false ],
       autoLogin: [ false ],
+      showGeneratedPassword: [ false ],
     });
   }
 

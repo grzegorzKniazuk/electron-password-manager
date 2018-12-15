@@ -1,4 +1,4 @@
-<app-form-header mat-dialog-title width="400px" left="-24px" top="-60px">Application settings</app-form-header>
+<app-form-header mat-dialog-title width="450px" left="-24px" top="-60px">Application settings</app-form-header>
 <mat-dialog-content>
   <form autocomplete="off" [formGroup]="applicationSettingsForm">
     <strong>Number of credentials per page in the table</strong>
@@ -7,12 +7,14 @@
         <mat-option *ngFor="let pageSize of pageSizeOptions" [value]="pageSize">{{ pageSize }}</mat-option>
       </mat-select>
     </mat-form-field>
+    <mat-checkbox formControlName="showGeneratedPassword">Show generated password</mat-checkbox>
+    <mat-hint>Check if You want to show generated password in toast messages</mat-hint>
     <mat-checkbox formControlName="autoLogin">Log in automatically</mat-checkbox>
-    <mat-hint>Check if you want to be logged in automatically.</mat-hint>
+    <mat-hint>Check if You want to be logged in automatically.</mat-hint>
     <mat-checkbox formControlName="autostart">Autostart</mat-checkbox>
-    <mat-hint>Check if you want the application to be run at system startup.</mat-hint>
+    <mat-hint>Check if You want the application to be run at system startup.</mat-hint>
     <mat-checkbox formControlName="minimalizeToTray">Minimalize to tray</mat-checkbox>
-    <mat-hint>Check if you want the application to be closed to the tray.</mat-hint>
+    <mat-hint>Check if You want the application to be closed to the tray.</mat-hint>
   </form>
 </mat-dialog-content>
 <mat-dialog-actions align="center">

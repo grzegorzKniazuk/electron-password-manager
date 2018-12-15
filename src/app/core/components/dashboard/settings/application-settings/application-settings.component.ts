@@ -36,6 +36,7 @@ export class ApplicationSettingsComponent implements OnInit {
       this.applicationSettingsForm.get('autostart').setValue(this.applicationSettings.autostart);
       this.applicationSettingsForm.get('minimalizeToTray').setValue(this.applicationSettings.minimalizeToTray);
       this.applicationSettingsForm.get('autoLogin').setValue(this.applicationSettings.autoLogin);
+      this.applicationSettingsForm.get('showGeneratedPassword').setValue(this.applicationSettings.showGeneratedPassword);
     } else {
       this.applicationSettingsForm.get('pageSize').setValue(8);
     }

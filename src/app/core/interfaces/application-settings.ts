@@ -3,4 +3,5 @@ export interface ApplicationSettings {
   autostart: boolean;
   minimalizeToTray: boolean;
   autoLogin: boolean;
+  showGeneratedPassword: boolean;
 }

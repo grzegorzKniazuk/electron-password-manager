@@ -17,7 +17,6 @@ export class AuthService {
     } else {
       if (password === window.localStorage.getItem('password')) {
         this.router.navigate(['/dashboard']);
-        this.toastService.success(ToastMessages.welcomeBack);
       } else {
         this.toastService.error(ToastMessages.incorrectPassword);
       }

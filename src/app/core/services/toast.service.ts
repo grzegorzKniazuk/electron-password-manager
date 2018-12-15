@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { MatSnackBar } from '@angular/material';
+import { SnackBarComponent } from '../../shared/components/snack-bar/snack-bar.component';
 
 @Injectable({
   providedIn: 'root',
@@ -10,6 +11,13 @@ export class ToastService {
 
   public success(message: string): void {
     this.matSnackBar.open(message, '', { panelClass: 'toast-success' });
+  }
+
+  public successWithComponent(message: string): void {
+    this.matSnackBar.openFromComponent(SnackBarComponent, {
+      panelClass: 'toast-success',
+      data: message,
+    });
   }
 
   public error(message: string): void {

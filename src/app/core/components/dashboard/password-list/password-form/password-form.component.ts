@@ -5,6 +5,7 @@ import {PasswordData} from '../../../../interfaces/password-data';
 import {MatDialogRef} from '@angular/material';
 import {Generator} from '../../../../models/generator.model';
 import {ToastService} from '../../../../services/toast.service';
+import { ToastMessages } from '../../../../enums/toast-messages.enum';
 
 @Component({
   selector: 'app-password-form',
@@ -19,6 +20,8 @@ export class PasswordFormComponent extends Generator implements OnInit {
   public passwordInputFocus = false;
   private password: string;
   private data: PasswordData[] = JSON.parse(window.localStorage.getItem('data'));
+  public isPasswordWasGenerated: boolean;
+  private previousGeneratedPassword: string;
 
   constructor(private formService: FormService,
               private toastService: ToastService,
@@ -32,6 +35,7 @@ export class PasswordFormComponent extends Generator implements OnInit {
       this.credentialsForm.get('refersTo').setValue(this.credentialsData.refersTo);
       this.credentialsForm.get('login').setValue(this.credentialsData.login);
       this.credentialsForm.get('password').setValue(this.credentialsData.password);
+      this.previousGeneratedPassword = this.credentialsData.password;
     }
   }
 
@@ -75,11 +79,16 @@ export class PasswordFormComponent extends Generator implements OnInit {
 
   public generatePassword(): void {
     this.password = super.generateNewPassword();
+    this.previousGeneratedPassword = this.credentialsForm.get('password').value;
     this.credentialsForm.get('password').setValue(this.password);
+    this.credentialsForm.get('password').markAsDirty();
     this.toastService.success(`The password generated is ${this.password}`);
+    this.isPasswordWasGenerated = true;
   }
 
   public restorePreviousPassword(): void {
-
+    this.credentialsForm.get('password').setValue(this.previousGeneratedPassword);
+    this.toastService.success(ToastMessages.successfullyRestored);
+    this.isPasswordWasGenerated = false;
   }
 }

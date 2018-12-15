@@ -5,7 +5,6 @@ import {MAT_DIALOG_DATA} from '@angular/material';
 @Component({
   selector: 'app-edit-password',
   templateUrl: './edit-password.component.html',
-  styleUrls: ['./edit-password.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class EditPasswordComponent {

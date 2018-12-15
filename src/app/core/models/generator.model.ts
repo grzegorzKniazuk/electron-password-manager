@@ -1,7 +1,7 @@
 import {GeneratorSettings} from '../interfaces/generator-settings';
 import * as generator from '../../../../node_modules/generate-password';
 
-export class Generator {
+export abstract class Generator {
 
   private generatorSettings: GeneratorSettings = JSON.parse(window.localStorage.getItem('generator-settings'));
 

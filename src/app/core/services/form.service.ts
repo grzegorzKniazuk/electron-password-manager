@@ -26,6 +26,7 @@ export class FormService {
 
   public get applicationSettingsForm(): FormGroup {
     return this.formBuilder.group({
+      pageSize: '',
       autostart: [ false ],
       minimalizeToTray: [ false ],
       autoLogin: [ false ],

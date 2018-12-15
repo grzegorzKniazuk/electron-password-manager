@@ -1,11 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  HostListener,
-  Inject,
-  OnInit,
-  Renderer2,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, HostListener, OnInit, Renderer2 } from '@angular/core';
 import { FormService } from '../../../../services/form.service';
 import { FormGroup } from '@angular/forms';
 import { MatDialogRef } from '@angular/material';
@@ -21,6 +14,7 @@ export class ApplicationSettingsComponent implements OnInit {
 
   public applicationSettingsForm: FormGroup;
   private applicationSettings: ApplicationSettings;
+  public readonly pageSizeOptions: number[] = [ 2, 4, 8, 16, 24, 32 ];
 
   constructor(private formService: FormService,
               private renderer2: Renderer2,
@@ -38,8 +32,12 @@ export class ApplicationSettingsComponent implements OnInit {
   private initForm(): void {
     if (window.localStorage.getItem('app-settings')) {
       this.applicationSettings = JSON.parse(window.localStorage.getItem('app-settings'));
+      this.applicationSettingsForm.get('pageSize').setValue(this.applicationSettings.pageSize);
       this.applicationSettingsForm.get('autostart').setValue(this.applicationSettings.autostart);
       this.applicationSettingsForm.get('minimalizeToTray').setValue(this.applicationSettings.minimalizeToTray);
+      this.applicationSettingsForm.get('autoLogin').setValue(this.applicationSettings.autoLogin);
+    } else {
+      this.applicationSettingsForm.get('pageSize').setValue(8);
     }
   }
 

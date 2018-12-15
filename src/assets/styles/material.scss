@@ -11,6 +11,10 @@ mat-checkbox {
   user-select: none;
 }
 
+mat-dialog-content {
+  margin-top: -30px;
+}
+
 mat-hint {
   @include font('ultra-small');
   margin-top: -8px;
@@ -25,3 +29,21 @@ mat-hint {
 button:disabled {
   cursor: not-allowed;
 }
+
+.toast-success {
+  background: $leaf;
+  color: $white;
+}
+
+.toast-error {
+  background: $danger;
+  color: $white;
+}
+
+::ng-deep .toast-success .mat-simple-snackbar, ::ng-deep .toast-error .mat-simple-snackbar {
+  @include flex(flex, center, center);
+  @include font('small');
+}
+
+
+

@@ -1,6 +1,6 @@
 <app-form-header mat-dialog-title width="400px" left="-24px" top="-60px">Application version</app-form-header>
 <mat-dialog-content align="center">
-  <p>Your application version is: {{ (dataService.appInformations$ | async).version }}</p>
+  <p>Your application version is: {{ dataService.appVersion }}</p>
   <strong>No update found</strong>
 </mat-dialog-content>
 <mat-dialog-actions align="center">

@@ -1,8 +1,9 @@
-import { ChangeDetectionStrategy, Component, HostListener, OnInit, Renderer2 } from '@angular/core';
+import { ChangeDetectionStrategy, Component, HostListener, OnInit } from '@angular/core';
 import { FormService } from '../../../../services/form.service';
 import { FormGroup } from '@angular/forms';
 import { MatDialogRef } from '@angular/material';
 import { ApplicationSettings } from '../../../../interfaces/application-settings';
+import { Dialog } from '../../../../models/dialog.model';
 
 @Component({
   selector: 'app-application-settings',
@@ -10,15 +11,16 @@ import { ApplicationSettings } from '../../../../interfaces/application-settings
   styleUrls: ['./application-settings.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ApplicationSettingsComponent implements OnInit {
+export class ApplicationSettingsComponent extends Dialog<ApplicationSettingsComponent> implements OnInit {
 
   public applicationSettingsForm: FormGroup;
   private applicationSettings: ApplicationSettings;
   public readonly pageSizeOptions: number[] = [ 2, 4, 8, 16, 24, 32 ];
 
   constructor(private formService: FormService,
-              private renderer2: Renderer2,
-              private matDialogRef: MatDialogRef<ApplicationSettingsComponent>) { }
+              protected matDialogRef: MatDialogRef<ApplicationSettingsComponent>) {
+    super(matDialogRef);
+  }
 
   ngOnInit() {
     this.buildForm();
@@ -46,10 +48,5 @@ export class ApplicationSettingsComponent implements OnInit {
   public saveApplicationSettings(): void {
     window.localStorage.setItem('app-settings', JSON.stringify(this.applicationSettingsForm.value));
     this.matDialogRef.close('saved');
-  }
-
-  @HostListener('document:keydown.esc')
-  private closeApplicationSettings(): void {
-    this.matDialogRef.close();
   }
 }

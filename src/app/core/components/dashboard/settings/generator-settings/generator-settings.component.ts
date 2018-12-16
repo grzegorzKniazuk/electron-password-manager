@@ -3,6 +3,7 @@ import { FormService } from '../../../../services/form.service';
 import { MatDialogRef } from '@angular/material';
 import { FormGroup } from '@angular/forms';
 import { GeneratorSettings } from '../../../../interfaces/generator-settings';
+import { Dialog } from '../../../../models/dialog.model';
 
 @Component({
   selector: 'app-generator-settings',
@@ -10,14 +11,16 @@ import { GeneratorSettings } from '../../../../interfaces/generator-settings';
   styleUrls: ['./generator-settings.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class GeneratorSettingsComponent implements OnInit {
+export class GeneratorSettingsComponent extends Dialog<GeneratorSettingsComponent> implements OnInit {
 
   public generatorSettingsForm: FormGroup;
-  public generatorSettings: GeneratorSettings;
+  public generatorFormSettings: GeneratorSettings;
   public readonly symbols = '!@#$%^&*()+_\\-=}{[\\]|:;"/?.><,`~.';
 
   constructor(private formService: FormService,
-              private matDialogRef: MatDialogRef<GeneratorSettingsComponent>) { }
+              protected matDialogRef: MatDialogRef<GeneratorSettingsComponent>) {
+    super(matDialogRef);
+  }
 
   ngOnInit() {
     this.buildForm();
@@ -30,14 +33,14 @@ export class GeneratorSettingsComponent implements OnInit {
 
   private initForm(): void {
     if (window.localStorage.getItem('generator-settings')) {
-      this.generatorSettings = JSON.parse(window.localStorage.getItem('generator-settings'));
-      this.generatorSettingsForm.get('length').setValue(this.generatorSettings.length);
-      this.generatorSettingsForm.get('numbers').setValue(this.generatorSettings.numbers);
-      this.generatorSettingsForm.get('symbols').setValue(this.generatorSettings.symbols);
-      this.generatorSettingsForm.get('uppercase').setValue(this.generatorSettings.uppercase);
-      this.generatorSettingsForm.get('excludeSimilarCharacters').setValue(this.generatorSettings.excludeSimilarCharacters);
-      this.generatorSettingsForm.get('exclude').setValue(this.generatorSettings.exclude);
-      this.generatorSettingsForm.get('strict').setValue(this.generatorSettings.strict);
+      this.generatorFormSettings = JSON.parse(window.localStorage.getItem('generator-settings'));
+      this.generatorSettingsForm.get('length').setValue(this.generatorFormSettings.length);
+      this.generatorSettingsForm.get('numbers').setValue(this.generatorFormSettings.numbers);
+      this.generatorSettingsForm.get('symbols').setValue(this.generatorFormSettings.symbols);
+      this.generatorSettingsForm.get('uppercase').setValue(this.generatorFormSettings.uppercase);
+      this.generatorSettingsForm.get('excludeSimilarCharacters').setValue(this.generatorFormSettings.excludeSimilarCharacters);
+      this.generatorSettingsForm.get('exclude').setValue(this.generatorFormSettings.exclude);
+      this.generatorSettingsForm.get('strict').setValue(this.generatorFormSettings.strict);
     }
   }
 
@@ -45,10 +48,5 @@ export class GeneratorSettingsComponent implements OnInit {
   public saveSettings(): void {
     window.localStorage.setItem('generator-settings', JSON.stringify(this.generatorSettingsForm.value));
     this.matDialogRef.close('saved');
-  }
-
-  @HostListener('document:keydown.esc')
-  public closeGeneratorSettings(): void {
-    this.matDialogRef.close();
   }
 }

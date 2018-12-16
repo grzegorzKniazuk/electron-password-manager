@@ -3,10 +3,11 @@ import { FormGroup } from '@angular/forms';
 import { FormService } from '../../../../services/form.service';
 import {PasswordData} from '../../../../interfaces/password-data';
 import {MatDialogRef} from '@angular/material';
-import {Generator} from '../../../../models/generator.model';
 import {ToastService} from '../../../../services/toast.service';
 import { ToastMessages } from '../../../../enums/toast-messages.enum';
 import { ApplicationSettings } from '../../../../interfaces/application-settings';
+import { DataService } from '../../../../services/data.service';
+import { Dialog } from '../../../../models/dialog.model';
 
 @Component({
   selector: 'app-password-form',
@@ -14,7 +15,7 @@ import { ApplicationSettings } from '../../../../interfaces/application-settings
   styleUrls: ['./password-form.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class PasswordFormComponent extends Generator implements OnInit {
+export class PasswordFormComponent extends Dialog<PasswordFormComponent> implements OnInit {
 
   @Input() public credentialsData: PasswordData;
   public credentialsForm: FormGroup;
@@ -27,8 +28,9 @@ export class PasswordFormComponent extends Generator implements OnInit {
 
   constructor(private formService: FormService,
               private toastService: ToastService,
-              private matDialogRef: MatDialogRef<PasswordFormComponent>) {
-    super();
+              private dataService: DataService,
+              protected matDialogRef: MatDialogRef<PasswordFormComponent>) {
+    super(matDialogRef);
   }
 
   ngOnInit() {
@@ -83,13 +85,8 @@ export class PasswordFormComponent extends Generator implements OnInit {
     }
   }
 
-  @HostListener('document:keydown.esc')
-  private closeDialog(): void {
-    this.matDialogRef.close();
-  }
-
   public generatePassword(): void {
-    this.password = super.generateNewPassword();
+    this.password = this.generateNewPassword();
     this.previousGeneratedPassword = this.credentialsForm.get('password').value;
     this.credentialsForm.get('password').setValue(this.password);
     this.credentialsForm.get('password').markAsDirty();
@@ -97,6 +94,7 @@ export class PasswordFormComponent extends Generator implements OnInit {
       this.toastService.successWithComponent(`The password generated is ${this.password}`);
     }
     this.isPasswordWasGenerated = true;
+    this.dataService.increasePasswordGeneratedCounter();
   }
 
   public restorePreviousPassword(): void {

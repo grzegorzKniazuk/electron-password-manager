@@ -16,7 +16,6 @@ import { ApplicationSettings } from '../../../interfaces/application-settings';
 import { StatisticsComponent } from '../settings/statistics/statistics.component';
 import { VersionInfoComponent } from '../settings/version-info/version-info.component';
 import { DataService } from '../../../services/data.service';
-import { AppInformations } from '../../../interfaces/app-informations';
 
 @Component({
   templateUrl: './password-list.component.html',
@@ -27,13 +26,6 @@ export class PasswordListComponent extends Generator implements OnInit, AfterCon
 
   @ViewChild(MatPaginator) private paginator: MatPaginator;
   @ViewChild(MatSort) private sort: MatSort;
-
-  private readonly defaultInfo: AppInformations = {
-    version: '1.0.0',
-    credentialsCount: 0,
-    passwordGenerated: 0,
-  };
-
   public data: PasswordData[] = [];
   public dataSource: MatTableDataSource<PasswordData>;
   public readonly columnList: string[] = [ 'date', 'website', 'login', 'password', 'actions' ];
@@ -43,19 +35,19 @@ export class PasswordListComponent extends Generator implements OnInit, AfterCon
   private pageSize: number;
 
   constructor(private matDialog: MatDialog,
-              private dataService: DataService,
               private matBottomSheet: MatBottomSheet,
               private toastService: ToastService,
+              private dataService: DataService,
               private changeDetectorRef: ChangeDetectorRef) {
     super();
   }
 
   ngOnInit() {
-    this.checkAppVersion();
     this.initSettings();
     this.initData();
     this.initPagination();
     this.initSort();
+    this.dataService.initDefaultApplicationInfo();
   }
 
   public ngAfterContentInit(): void {
@@ -201,13 +193,6 @@ export class PasswordListComponent extends Generator implements OnInit, AfterCon
   public generateAndCopyRandomPassword(): void {
     this.randomGeneratedPassword = super.generateNewPassword();
     this.copyPassword(this.randomGeneratedPassword, true);
-  }
-
-  private checkAppVersion(): void {
-    console.log(JSON.parse(localStorage.getItem('app-info')));
-    if (!JSON.parse(localStorage.getItem('app-info'))) {
-      localStorage.setItem('app-info', JSON.stringify(this.defaultInfo));
-    }
-    this.dataService.appInformations$.next(JSON.parse(localStorage.getItem('app-info')));
+    this.dataService.increasePasswordGeneratedCounter();
   }
 }

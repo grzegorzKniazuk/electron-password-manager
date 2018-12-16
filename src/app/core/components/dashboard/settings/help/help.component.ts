@@ -1,4 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { Dialog } from '../../../../models/dialog.model';
+import { MatDialogRef } from '@angular/material';
 
 @Component({
   selector: 'app-help',
@@ -6,4 +8,9 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   styleUrls: ['./help.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class HelpComponent {}
+export class HelpComponent extends Dialog<HelpComponent> {
+
+  constructor(protected matDialogRef: MatDialogRef<HelpComponent>) {
+    super(matDialogRef);
+  }
+}

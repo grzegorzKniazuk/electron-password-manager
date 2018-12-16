@@ -1,0 +1,5 @@
+@import "./src/assets/styles/base.scss";
+
+mat-dialog-content {
+  @include flex(flex, center, center, column);
+}

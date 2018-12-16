@@ -11,7 +11,7 @@ import {
   MatIconModule,
   MatInputModule, MatPaginatorModule, MatSelectModule,
   MatSnackBarConfig,
-  MatSnackBarModule,
+  MatSnackBarModule, MatSortModule,
   MatTableModule,
   MatToolbarModule, MatTooltipDefaultOptions, MatTooltipModule,
 } from '@angular/material';
@@ -57,6 +57,7 @@ const MAT_BOTTOM_SHEET_GLOBAL_CONFIG: MatBottomSheetConfig = {
     MatTooltipModule,
     MatBottomSheetModule,
     MatSelectModule,
+    MatSortModule,
   ],
   exports: [
     MatIconModule,
@@ -72,6 +73,7 @@ const MAT_BOTTOM_SHEET_GLOBAL_CONFIG: MatBottomSheetConfig = {
     MatTooltipModule,
     MatBottomSheetModule,
     MatSelectModule,
+    MatSortModule,
   ],
   providers: [
     { provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: MAT_DIALOG_GLOBAL_CONFIG },

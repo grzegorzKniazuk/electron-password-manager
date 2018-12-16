@@ -9,12 +9,8 @@ import { Modal } from '../../../models/modal.model';
 @Component({
   templateUrl: './password-list.component.html',
   styleUrls: ['./password-list.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PasswordListComponent extends Modal implements OnInit, AfterContentInit {
-
-
-
 
   public readonly columnList: string[] = [ 'date', 'website', 'login', 'password', 'actions' ];
   public passwordId: number;
@@ -33,6 +29,7 @@ export class PasswordListComponent extends Modal implements OnInit, AfterContent
     super.initData();
     super.initPagination();
     super.initSort();
+    // this.initFilter();
     this.dataService.initDefaultApplicationInfo();
   }
 
@@ -46,10 +43,16 @@ export class PasswordListComponent extends Modal implements OnInit, AfterContent
     });
   }
 
+  private applyFilter(filterValue: string): void {
+    this.dataSource.filterPredicate = (data: PasswordData, filter: string) => {
+      return data.refersTo.indexOf(filter) !== -1;
+    };
+  }
+  /*
   public applyFilter(filterValue: string): void {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
-
+  */
   public showPassword(element: PasswordData): void {
     this.passwordId = element.id;
   }

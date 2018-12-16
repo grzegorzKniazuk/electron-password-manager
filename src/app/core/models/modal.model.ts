@@ -10,7 +10,7 @@ import { HelpComponent } from '../components/dashboard/settings/help/help.compon
 import { ApplicationInfoComponent } from '../components/dashboard/settings/application-info/application-info.component';
 import { ApplicationSettingsComponent } from '../components/dashboard/settings/application-settings/application-settings.component';
 import { ApplicationSettings } from '../interfaces/application-settings';
-import { ChangeDetectorRef, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, HostListener, ViewChild } from '@angular/core';
 import { PasswordData } from '../interfaces/password-data';
 import { EditPasswordComponent } from '../components/dashboard/password-list/edit-password/edit-password.component';
 import { AddPasswordComponent } from '../components/dashboard/password-list/add-password/add-password.component';
@@ -145,5 +145,12 @@ export abstract class Modal extends Generator {
         this.toastService.success(ToastMessages.credentialsSaved);
       }
     });
+  }
+
+  @HostListener('document:keypress', ['$event'])
+  private listenKeyCodes(event: KeyboardEvent): void {
+    if (event.code === 'NumpadAdd') {
+      this.openNewPasswordModal();
+    }
   }
 }

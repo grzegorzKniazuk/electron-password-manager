@@ -1,32 +1,79 @@
-const { app, BrowserWindow } = require('electron');
+const { app, BrowserWindow, Tray, Menu } = require('electron');
 
-let win;
+let window;
+let trayContextMenu;
+let appIcon;
+const iconPath = `./dist/password-manager/assets/images/key.png`;
 
-function createWindow () {
-  win = new BrowserWindow({
-    width: 1366,
+function createContextMenu() {
+  trayContextMenu = Menu.buildFromTemplate([
+    { label: 'Show App',
+      click: () => {
+        window.show();
+      }},
+    { label: 'Quit',
+      click: () => {
+        app.isQuiting = true;
+        app.quit();
+      }
+    }
+  ]);
+}
+
+function createWindow() {
+  window = new BrowserWindow({
+    width: 1024,
     height: 768,
-    icon: `./dist/password-manager/assets/images/key.png`,
+    icon: iconPath,
     autoHideMenuBar: true,
     webPreferences: {
       nodeIntegration: false,
       devTools: false,
     },
   });
+}
 
-  win.loadURL(`file://${__dirname}/dist/password-manager/index.html`);
+function windowLoad() {
+  appIcon = new Tray(iconPath);
+  appIcon.setContextMenu(trayContextMenu);
+  window.loadURL(`file://${__dirname}/dist/password-manager/index.html`);
+}
 
-  // Event when the window is closed.
-  win.on('closed', function () {
-    win = null
+function watchWindowEvents() {
+  window.on('minimize', (event) => {
+    event.preventDefault();
+    window.hide();
+  });
+
+  window.on('close', (event) => {
+    if(!app.isQuiting){
+      event.preventDefault();
+      window.hide();
+    }
+    return false;
+  });
+
+  window.on('closed', () => {
+    window = null;
+  });
+
+  window.on('show', () => {
+    appIcon.setHighlightMode('always');
   });
 }
 
+function init() {
+  createContextMenu();
+  createWindow();
+  windowLoad();
+  watchWindowEvents();
+}
+
 // Create window on electron intialization
-app.on('ready', createWindow);
+app.on('ready', init);
 
 // Quit when all windows are closed.
-app.on('window-all-closed', function () {
+app.on('window-all-closed', () => {
 
   // On macOS specific close process
   if (process.platform !== 'darwin') {
@@ -34,9 +81,9 @@ app.on('window-all-closed', function () {
   }
 });
 
-app.on('activate', function () {
+app.on('activate', () => {
   // macOS specific close process
-  if (win === null) {
-    createWindow();
+  if (window === null) {
+    init();
   }
 });

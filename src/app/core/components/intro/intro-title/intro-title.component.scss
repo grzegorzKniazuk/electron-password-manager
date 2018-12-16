@@ -1,0 +1,18 @@
+@import "./src/assets/styles/base.scss";
+
+p {
+  @include font('medium');
+  color: $white;
+
+  span:nth-of-type(1) {
+    animation: dot 1250ms ease-in infinite;
+  }
+
+  span:nth-of-type(2) {
+    animation: dot 1250ms ease-in 1250ms infinite;
+  }
+
+  span:nth-of-type(3) {
+    animation: dot 1250ms ease-in 1500ms infinite;
+  }
+}

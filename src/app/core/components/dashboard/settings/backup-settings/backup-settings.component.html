@@ -1,1 +1,7 @@
-<app-form-header mat-dialog-title width="500px" left="-24px" top="-60px">Backup & Restore</app-form-header>
+<div class="backup-container">
+  <div class="button-container">
+    <button mat-raised-button color="primary" (click)="response('backup')">BACKUP CREDENTIALS</button>
+    <button mat-fab color="primary">OR</button>
+    <button mat-raised-button color="accent" (click)="response('restore')">RESTORE CREDENTIALS</button>
+  </div>
+</div>

@@ -73,8 +73,14 @@ export abstract class Modal extends Generator {
   }
 
   public openBackupSettingsModal(): void {
-    this.matDialog.open(BackupSettingsComponent, {
-      width: '500px',
+    this.matBottomSheet.open(BackupSettingsComponent, {
+      disableClose: false,
+    }).afterDismissed().subscribe((response: string) => {
+      if (response === 'backup') {
+
+      } else if (response === 'restore') {
+
+      }
     });
   }
 

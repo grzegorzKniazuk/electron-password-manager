@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { MaterialModule } from '../material.module';
 import { SharedModule } from '../shared/shared.module';
 import { IntroComponent } from './components/intro/intro.component';
+import { IntroTitleComponent } from './components/intro/intro-title/intro-title.component';
 
 @NgModule({
   imports: [
@@ -12,6 +13,7 @@ import { IntroComponent } from './components/intro/intro.component';
   ],
   declarations: [
     IntroComponent,
+    IntroTitleComponent,
   ]
 })
 export class CoreModule { }

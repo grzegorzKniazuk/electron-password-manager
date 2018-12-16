@@ -1,6 +1,6 @@
 import {ChangeDetectionStrategy, Component} from '@angular/core';
-import { Dialog } from '../../../../models/dialog.model';
-import { MatDialogRef } from '@angular/material';
+import { MatBottomSheetRef } from '@angular/material';
+import { Confirm } from '../../../../models/confirm.model';
 
 @Component({
   selector: 'app-backup-settings',
@@ -8,9 +8,9 @@ import { MatDialogRef } from '@angular/material';
   styleUrls: ['./backup-settings.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class BackupSettingsComponent extends Dialog<BackupSettingsComponent> {
+export class BackupSettingsComponent extends Confirm {
 
-  constructor(protected matDialogRef: MatDialogRef<BackupSettingsComponent>) {
-    super(matDialogRef);
+  constructor(protected matBottomSheetRef: MatBottomSheetRef) {
+    super(matBottomSheetRef);
   }
 }

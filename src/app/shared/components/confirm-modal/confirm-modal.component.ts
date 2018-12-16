@@ -1,5 +1,6 @@
 import {ChangeDetectionStrategy, Component} from '@angular/core';
 import {MatBottomSheetRef} from '@angular/material';
+import { Confirm } from '../../../core/models/confirm.model';
 
 @Component({
   selector: 'app-confirm-modal',
@@ -7,11 +8,9 @@ import {MatBottomSheetRef} from '@angular/material';
   styleUrls: ['./confirm-modal.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ConfirmModalComponent {
+export class ConfirmModalComponent extends Confirm {
 
-  constructor(private matBottomSheetRef: MatBottomSheetRef) {}
-
-  public response(response: string): void {
-    this.matBottomSheetRef.dismiss(response);
+  constructor(protected matBottomSheetRef: MatBottomSheetRef) {
+    super(matBottomSheetRef);
   }
 }

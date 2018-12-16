@@ -9,4 +9,5 @@ export enum ToastMessages {
   settingsSaved = 'Settings saved successfully',
   error = 'Unspecified error',
   successfullyRestored = 'Password has been restored successfully',
+  restore = 'The data has been restored',
 }

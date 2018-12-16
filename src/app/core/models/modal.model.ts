@@ -79,7 +79,9 @@ export abstract class Modal extends Generator {
       if (response === 'backup') {
 
       } else if (response === 'restore') {
-
+        this.toastService.success(ToastMessages.restore);
+        this.initData();
+        this.changeDetectorRef.detectChanges();
       }
     });
   }

@@ -9,23 +9,41 @@
 
   .button-container {
 
-    button {
-      &:first-of-type {
+    .element {
+      display: inline-flex;
+    }
+
+    a {
+      text-decoration: none;
+      .backup {
         padding-right: 30px;
         margin-right: -15px;
       }
+    }
 
-      &:nth-of-type(2) {
-        cursor: default;
-        user-select: none;
-        pointer-events: none;
-        z-index: 1001 !important;
-      }
+    .or {
+      cursor: default;
+      user-select: none;
+      pointer-events: none;
+      z-index: 1001 !important;
+    }
 
-      &:last-of-type {
-        padding-left: 30px;
-        margin-left: -15px;
-      }
+    input[type='file'] {
+      position: absolute;
+      top: 20px;
+      left: 50%;
+      width: 250px;
+      opacity: 0;
+      overflow: hidden;
+      z-index: 1;
+      cursor: pointer;
+      font-size: 0;
+    }
+
+    .restore {
+      padding-left: 30px;
+      margin-left: -15px;
+      z-index: -1;
     }
   }
 }

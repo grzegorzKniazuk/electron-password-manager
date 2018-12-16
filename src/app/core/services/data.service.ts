@@ -33,6 +33,11 @@ export class DataService {
     return JSON.parse(localStorage.getItem('app-info')).version;
   }
 
+  public get passwordData(): PasswordData[] {
+    this.data = JSON.parse(localStorage.getItem('data'));
+    return this.data;
+  }
+
   public loadCredentialsCounter(): void {
     this.data = JSON.parse(localStorage.getItem('data'));
     this.defaultInfo.credentialsCount = this.data.length;

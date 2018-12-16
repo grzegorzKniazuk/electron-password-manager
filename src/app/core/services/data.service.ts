@@ -8,7 +8,7 @@ import { PasswordData } from '../interfaces/password-data';
 })
 export class DataService {
 
-  private readonly defaultInfo: AppInformations = {
+  private defaultInfo: AppInformations = {
     version: '1.0.0',
     credentialsCount: 0,
     passwordGenerated: 0,
@@ -24,6 +24,8 @@ export class DataService {
   public initDefaultApplicationInfo(): void {
     if (!JSON.parse(localStorage.getItem('app-info'))) {
       localStorage.setItem('app-info', JSON.stringify(this.defaultInfo));
+    } else {
+      this.defaultInfo = JSON.parse(localStorage.getItem('app-info'));
     }
   }
 

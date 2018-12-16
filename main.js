@@ -6,17 +6,15 @@ function createWindow () {
   win = new BrowserWindow({
     width: 1366,
     height: 768,
-    icon: `file://${__dirname}/dist/assets/images/key.ico`,
+    icon: `./dist/password-manager/assets/images/key.png`,
     autoHideMenuBar: true,
     webPreferences: {
       nodeIntegration: false,
+      devTools: false,
     },
   });
 
-
   win.loadURL(`file://${__dirname}/dist/password-manager/index.html`);
-
-  // win.webContents.openDevTools();
 
   // Event when the window is closed.
   win.on('closed', function () {

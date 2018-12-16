@@ -10,4 +10,5 @@ export enum ToastMessages {
   error = 'Unspecified error',
   successfullyRestored = 'Password has been restored successfully',
   restore = 'The data has been restored',
+  appInit = 'This is the first launch of the application. Enter the password what you will use to log in the future',
 }

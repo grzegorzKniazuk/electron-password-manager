@@ -20,14 +20,22 @@ export class IntroComponent implements OnInit {
               private renderer2: Renderer2) {}
 
   public ngOnInit(): void {
+    this.animateLogo();
+    this.loadApplicationSettings();
+  }
+
+  private animateLogo(): void {
     this.renderer2.addClass(this.imgElement.nativeElement, 'scale');
-    this.applicationSettings = JSON.parse(localStorage.getItem('app-settings'));
   }
 
   private autoLogin(): void {
     if (this.applicationSettings && this.applicationSettings.autoLogin) {
       this.authService.login(localStorage.getItem('password'));
     }
+  }
+
+  private loadApplicationSettings(): void {
+    this.applicationSettings = JSON.parse(localStorage.getItem('app-settings'));
   }
 
   @HostListener('document:keydown.enter')
@@ -46,6 +54,6 @@ export class IntroComponent implements OnInit {
       this.router.navigate(['login']).catch((error) => {
         this.toastService.error(error);
       });
-    }, 2000);
+    }, 1000);
   }
 }

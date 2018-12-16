@@ -9,6 +9,7 @@ import { Modal } from '../../../models/modal.model';
 @Component({
   templateUrl: './password-list.component.html',
   styleUrls: ['./password-list.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PasswordListComponent extends Modal implements OnInit, AfterContentInit {
 

@@ -10,7 +10,9 @@ export class ToastService {
   constructor(private matSnackBar: MatSnackBar) { }
 
   public success(message: string): void {
-    this.matSnackBar.open(message, '', { panelClass: 'toast-success' });
+    this.matSnackBar.open(message, '', {
+      panelClass: 'toast-success'
+    });
   }
 
   public successWithComponent(message: string): void {
@@ -20,7 +22,16 @@ export class ToastService {
     });
   }
 
+  public success30000(message: string): void {
+    this.matSnackBar.open(message, '', {
+      panelClass: 'toast-success',
+      duration: 30000,
+    });
+  }
+
   public error(message: string): void {
-    this.matSnackBar.open(message, '', { panelClass: 'toast-error' });
+    this.matSnackBar.open(message, '', {
+      panelClass: 'toast-error'
+    });
   }
 }

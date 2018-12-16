@@ -1,5 +1,7 @@
 {
-  "name": "password-manager",
+  "name": "simple-password-manager",
+  "description": "Angular 6 + Angular Material desktop application to manage web credentials",
+  "author": "Grzegorz Kniazuk",
   "version": "0.0.0",
   "main": "main.js",
   "scripts": {
@@ -41,6 +43,7 @@
     "@types/node": "~8.9.4",
     "codelyzer": "~4.5.0",
     "electron": "^3.0.10",
+    "electron-builder": "^20.38.3",
     "electron-packager": "^13.0.0",
     "jasmine-core": "~2.99.1",
     "jasmine-spec-reporter": "~4.2.1",

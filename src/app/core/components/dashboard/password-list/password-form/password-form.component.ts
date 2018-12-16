@@ -25,6 +25,7 @@ export class PasswordFormComponent extends Dialog<PasswordFormComponent> impleme
   public isPasswordWasGenerated: boolean;
   private previousGeneratedPassword: string;
   private applicationSettings: ApplicationSettings;
+  private editMode: boolean;
 
   constructor(private formService: FormService,
               private toastService: ToastService,
@@ -53,10 +54,21 @@ export class PasswordFormComponent extends Dialog<PasswordFormComponent> impleme
       this.credentialsForm.get('login').setValue(this.credentialsData.login);
       this.credentialsForm.get('password').setValue(this.credentialsData.password);
       this.previousGeneratedPassword = this.credentialsData.password;
+      this.editMode = true;
+    } else {
+      this.editMode = false;
     }
   }
 
   @HostListener('document:keydown.enter')
+  private listenKeydownEnter(): void {
+    if (this.editMode) {
+      this.updateCredentials();
+    } else {
+      this.saveCredentials();
+    }
+  }
+
   public saveCredentials(): void {
     if (this.credentialsForm.valid) {
       this.data.push({
@@ -70,7 +82,6 @@ export class PasswordFormComponent extends Dialog<PasswordFormComponent> impleme
     }
   }
 
-  @HostListener('document:keydown.enter')
   public updateCredentials(): void {
     if (this.credentialsData && this.credentialsForm.valid) {
       this.data = this.data.filter((password: PasswordData) => password.id !== this.credentialsData.id);

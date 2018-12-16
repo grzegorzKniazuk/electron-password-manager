@@ -30,7 +30,7 @@ export class PasswordListComponent extends Modal implements OnInit, AfterContent
     super.initData();
     super.initPagination();
     super.initSort();
-    // this.initFilter();
+    this.initFilter();
     this.dataService.initDefaultApplicationInfo();
   }
 
@@ -44,16 +44,16 @@ export class PasswordListComponent extends Modal implements OnInit, AfterContent
     });
   }
 
-  private applyFilter(filterValue: string): void {
+  private initFilter(): void {
     this.dataSource.filterPredicate = (data: PasswordData, filter: string) => {
-      return data.refersTo.indexOf(filter) !== -1;
+      return data.refersTo.trim().toLowerCase().includes(filter.trim().toLowerCase());
     };
   }
-  /*
+
   public applyFilter(filterValue: string): void {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
-  */
+
   public showPassword(element: PasswordData): void {
     this.passwordId = element.id;
   }

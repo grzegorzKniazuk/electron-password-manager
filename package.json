@@ -1,25 +1,16 @@
 {
   "name": "simple-password-manager",
-  "description": "Angular 6 + Angular Material desktop application to manage web credentials",
-  "author": {
-    "name": "Grzegorz Kniazuk",
-    "email": "grzegorz.kniazuk@gmail.com"
-  },
   "version": "1.0.0",
   "main": "main.js",
-  "keywords": [ "password", "manager" ],
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/grzegorzKniazuk/electron-password-manager/issues",
-    "email": "grzegorz.kniazuk@gmail.com"
+  "build": {
+    "directories": {
+      "buildResources": "password-manager",
+      "output": "app"
+    }
   },
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
-    "test": "ng test",
-    "lint": "ng lint",
-    "e2e": "ng e2e",
     "electron": "electron .",
     "electron-build": "ng build --prod && electron ."
   },
@@ -51,8 +42,10 @@
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "~8.9.4",
     "codelyzer": "~4.5.0",
+    "cross-env": "^5.2.0",
     "electron": "^3.0.10",
     "electron-builder": "^20.38.3",
+    "electron-log": "^2.2.17",
     "electron-packager": "^13.0.0",
     "jasmine-core": "~2.99.1",
     "jasmine-spec-reporter": "~4.2.1",

@@ -1,9 +1,11 @@
 const { app, BrowserWindow, Tray, Menu } = require('electron');
+const url = require('url');
+const path = require('path');
 
 let window;
 let trayContextMenu;
 let appIcon;
-const iconPath = `./dist/password-manager/assets/images/key.png`;
+const iconPath = path.join(__dirname, 'dist/password-manager/assets/images/key.png');
 
 function createContextMenu() {
   trayContextMenu = Menu.buildFromTemplate([
@@ -29,14 +31,23 @@ function createWindow() {
     webPreferences: {
       nodeIntegration: false,
       devTools: false,
+      webSecurity: false,
     },
   });
+  // window.webContents.openDevTools();
+}
+
+function contextMenuInit() {
+  appIcon = new Tray(iconPath);
+  appIcon.setContextMenu(trayContextMenu);
 }
 
 function windowLoad() {
-  appIcon = new Tray(iconPath);
-  appIcon.setContextMenu(trayContextMenu);
-  window.loadURL(`file://${__dirname}/dist/password-manager/index.html`);
+  window.loadURL(url.format({
+    pathname: path.join(__dirname, 'dist/password-manager/index.html'),
+    protocol: 'file',
+    slashes: true,
+  }));
 }
 
 function watchWindowEvents() {
@@ -65,6 +76,7 @@ function watchWindowEvents() {
 function init() {
   createContextMenu();
   createWindow();
+  contextMenuInit();
   windowLoad();
   watchWindowEvents();
 }

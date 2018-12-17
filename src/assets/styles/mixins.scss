@@ -26,16 +26,6 @@ $border-radius: 4px;
   left: $left;
 }
 
-@mixin data-icon($x, $y, $padding-left) {
-  $icons: 'user', 'password', 'mail', 'tv', 'package', 'image', 'edit';
-  @each $icon in $icons {
-    &[data-icon=#{$icon}] {
-      background: $light url('~src/assets/icons/#{$icon}.svg') no-repeat $x $y;
-      padding-left: $padding-left;
-    }
-  }
-}
-
 @mixin font($font-size, $font-weight: 400, $font-family: 'Roboto') {
   @if ($font-size == 'ultra-small') {
     font-size: .75rem;

@@ -28,7 +28,7 @@ export class FormService {
     return this.formBuilder.group({
       pageSize: '',
       autostart: [ false ],
-      minimalizeToTray: [ false ],
+      minimizeToTray: [ false ],
       autoLogin: [ false ],
       showGeneratedPassword: [ false ],
     });

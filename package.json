@@ -1,9 +1,18 @@
 {
   "name": "simple-password-manager",
   "description": "Angular 6 + Angular Material desktop application to manage web credentials",
-  "author": "Grzegorz Kniazuk",
-  "version": "0.0.0",
+  "author": {
+    "name": "Grzegorz Kniazuk",
+    "email": "grzegorz.kniazuk@gmail.com"
+  },
+  "version": "1.0.0",
   "main": "main.js",
+  "keywords": [ "password", "manager" ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/grzegorzKniazuk/electron-password-manager/issues",
+    "email": "grzegorz.kniazuk@gmail.com"
+  },
   "scripts": {
     "ng": "ng",
     "start": "ng serve",

@@ -36,7 +36,7 @@ export class ApplicationSettingsComponent extends Dialog<ApplicationSettingsComp
       this.applicationSettings = JSON.parse(window.localStorage.getItem('app-settings'));
       this.applicationSettingsForm.get('pageSize').setValue(this.applicationSettings.pageSize);
       this.applicationSettingsForm.get('autostart').setValue(this.applicationSettings.autostart);
-      this.applicationSettingsForm.get('minimalizeToTray').setValue(this.applicationSettings.minimalizeToTray);
+      this.applicationSettingsForm.get('minimizeToTray').setValue(this.applicationSettings.minimizeToTray);
       this.applicationSettingsForm.get('autoLogin').setValue(this.applicationSettings.autoLogin);
       this.applicationSettingsForm.get('showGeneratedPassword').setValue(this.applicationSettings.showGeneratedPassword);
     } else {

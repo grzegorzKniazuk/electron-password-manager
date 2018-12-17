@@ -1,7 +1,7 @@
 export interface ApplicationSettings {
   pageSize: number;
   autostart: boolean;
-  minimalizeToTray: boolean;
+  minimizeToTray: boolean;
   autoLogin: boolean;
   showGeneratedPassword: boolean;
 }

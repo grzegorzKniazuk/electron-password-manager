@@ -22,7 +22,7 @@ function createContextMenu() {
 
 function createWindow() {
   window = new BrowserWindow({
-    width: 1024,
+    width: 1280,
     height: 768,
     icon: iconPath,
     autoHideMenuBar: true,

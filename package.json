@@ -2,6 +2,11 @@
   "name": "simple-password-manager",
   "version": "1.0.0",
   "main": "main.js",
+  "author": "Grzegorz Kniażuk",
+  "description": "Simple Password Manager created by Electron & Angular",
+  "bugs": {
+    "email": "grzegorz.kniazuk@gmail.com",
+  },
   "build": {
     "directories": {
       "buildResources": "password-manager",

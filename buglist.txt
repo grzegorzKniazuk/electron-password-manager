@@ -1,0 +1,9 @@
+1. przewijanie stron scrollem
+2. przycinanie za dlugich hasel
+3. wyswietlenie komunikatu pierwszego logowania tylko przy pierwszym logowaniu
+4. double click otwiera apke
+5. przy tworzeniu nowego hasla i generowaniu go automatyczne kopiowanie
+6. rozjezdzanie sie tabeli przy za duzej ilosci wierszy
+7. maksymalnie jedna instancja aplikacji
+8. double-click na login kopjuje go
+9. ikona do latwego czyszczenia wyszukiwania
